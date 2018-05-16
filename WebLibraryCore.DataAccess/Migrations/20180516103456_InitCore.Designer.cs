@@ -11,9 +11,10 @@ using WebLibraryCore.DataAccess;
 namespace WebLibraryCore.DataAccess.Migrations
 {
     [DbContext(typeof(EFDbContext))]
-    partial class EFDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180516103456_InitCore")]
+    partial class InitCore
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

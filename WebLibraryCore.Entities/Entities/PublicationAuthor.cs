@@ -6,14 +6,14 @@ using System.Text;
 
 namespace WebLibraryCore.Entities.Entities
 {
-    public class ArticleAuthor
+    public class PublicationAuthor
     {
-        
-        public int ArticleID { get; set; }
-        
+
+        public int PublicationID { get; set; }
+
         public int AuthorID { get; set; }
 
-        public Article Articles { get; set; }
+        public Publication Publications { get; set; }
         public Author Authors { get; set; }
     }
 }

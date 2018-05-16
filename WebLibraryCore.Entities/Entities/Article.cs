@@ -17,13 +17,8 @@ namespace WebLibraryCore.Entities.Entities
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateOfArticlePublish { get; set; }
 
-        //public ArticleGenre ArticleGenres { get; set; }
+        public ArticleGenre ArticleGenres { get; set; }
 
-        ////public virtual IEnumerable<Author> Authors { get; set; }
-
-        //public Article()
-        //{
-        //   // Authors = new List<Author>();
-        //}
+        public virtual ICollection<ArticleAuthor> ArticleAuthors { get; } = new List<ArticleAuthor>();
     }
 }
