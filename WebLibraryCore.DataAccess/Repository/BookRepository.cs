@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,21 @@ namespace WebLibraryCore.DataAccess.Repository
 {
     public class BookRepository : GenericRepository<Book>, IBookRepository
     {
-        public BookRepository(EFDbContext context) : base(context){}
+        private readonly EFDbContext context;
 
-        public IEnumerable<Author> GetAllBooksWithGenres()
+        public BookRepository(EFDbContext context) : base(context){
+            this.context = context;
+        }
+
+        public IEnumerable<Book> GetAllBooksWithGenres()
         {
-            var initBookAuthorList = context.BookAuthors.Where(x => x.BookID == book.BookID).Select(x => x.Authors).ToList();
+            return context.Books.Include(g => g.BookGenres);
+        }
+
+        public IEnumerable<Author> GetAuthorsNotExistInBook(Book book)
+        {
+            var initBookAuthorList = book.BookAuthors.Where(x => x.BookID == book.BookID).Select(x => x.Authors).ToList();
+                //context.BookAuthors.Where(x => x.BookID == book.BookID).Select(x => x.Authors).ToList();
 
             List<Author> finalListOfAuthors = new List<Author>();
 
@@ -28,14 +39,22 @@ namespace WebLibraryCore.DataAccess.Repository
             return finalListOfAuthors;
         }
 
-        public IEnumerable<Author> GetAuthorsNotExistInBook(Book book)
+        public async Task<Book> GetBookDetails(int id)
         {
-            throw new NotImplementedException();
-        }
+            var book = await GetByID(id);
+            BookGenre genre = context.BookGenres.Where(x => x.GenreID == book.GenreID).SingleOrDefault();
 
-        public Task<Book> GetBookDetails(int id)
-        {
-            throw new NotImplementedException();
+            //var authorList = book.BookAuthors.Where(x => x.BookID == book.BookID).Select(x => x.Authors).ToList();
+
+            Book bookVM = new Book()
+            {
+                BookID = book.BookID,
+                BookName = book.BookName,
+                YearOfPublish = book.YearOfPublish,
+                BookGenres = genre
+                //Authors = authorList
+            };
+            return bookVM;
         }
     }
 }

@@ -17,5 +17,10 @@ namespace WebLibraryCore.Entities.Entities
         {
             Articles = new List<Article>();
         }
+
+        public IEnumerable<object> Where(Func<object, bool> p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

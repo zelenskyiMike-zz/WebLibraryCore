@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebLibraryCore.WebUI", "WebLibraryCore\WebLibraryCore.WebUI.csproj", "{855E5179-8720-401B-8C1C-3C88993F2B5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebLibraryCore.WebUI", "WebLibraryCore\WebLibraryCore.WebUI.csproj", "{855E5179-8720-401B-8C1C-3C88993F2B5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebLibraryCore.BusinessLogic", "WebLibraryCore.BusinessLogic\WebLibraryCore.BusinessLogic.csproj", "{B25307BB-3D05-4F35-8A71-3B6837C29B57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebLibraryCore.BusinessLogic", "WebLibraryCore.BusinessLogic\WebLibraryCore.BusinessLogic.csproj", "{B25307BB-3D05-4F35-8A71-3B6837C29B57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebLibraryCore.DataAccess", "WebLibraryCore.DataAccess\WebLibraryCore.DataAccess.csproj", "{2475BBFA-B9CC-4B4C-9987-B3A7CB037C32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebLibraryCore.DataAccess", "WebLibraryCore.DataAccess\WebLibraryCore.DataAccess.csproj", "{2475BBFA-B9CC-4B4C-9987-B3A7CB037C32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebLibraryCore.Entities", "WebLibraryCore.Entities\WebLibraryCore.Entities.csproj", "{5682558E-6296-4B79-A401-687F7636ABD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebLibraryCore.Entities", "WebLibraryCore.Entities\WebLibraryCore.Entities.csproj", "{5682558E-6296-4B79-A401-687F7636ABD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{4333935E-A91E-4798-968F-5BFF6833AAA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebLibraryCore.ViewModels", "ViewModels\WebLibraryCore.ViewModels.csproj", "{4333935E-A91E-4798-968F-5BFF6833AAA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

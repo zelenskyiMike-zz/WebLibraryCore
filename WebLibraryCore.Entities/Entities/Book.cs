@@ -16,7 +16,7 @@ namespace WebLibraryCore.Entities.Entities
         public string BookName { get; set; }
         public int YearOfPublish { get; set; }
 
-        public BookGenre Genres { get; set; }
+        public BookGenre BookGenres { get; set; }
 
         public virtual ICollection<BookAuthor> BookAuthors { get; } = new List<BookAuthor>();
 
