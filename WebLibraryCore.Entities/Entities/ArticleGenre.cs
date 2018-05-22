@@ -11,16 +11,6 @@ namespace WebLibraryCore.Entities.Entities
         public int ArticleGenreID { get; set; }
         public string ArticleGenreName { get; set; }
 
-        public IEnumerable<Article> Articles { get; set; }
-
-        public ArticleGenre()
-        {
-            Articles = new List<Article>();
-        }
-
-        public IEnumerable<object> Where(Func<object, bool> p)
-        {
-            throw new NotImplementedException();
-        }
+        public List<Article> Articles { get; } = new List<Article>();
     }
 }

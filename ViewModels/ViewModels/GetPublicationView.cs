@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace WebLibraryCore.Entities.Entities
+namespace WebLibraryCore.ViewModels.ViewModels
 {
-    public class Publication
+    public class GetPublicationView
     {
-        [Key]
         public int PublicationID { get; set; }
         [Required]
         public int PublicationGenreID { get; set; }
@@ -16,8 +15,8 @@ namespace WebLibraryCore.Entities.Entities
         [Required]
         public DateTime DateOfPublicationPublish { get; set; }
 
-        public PublicationGenre PublicationGenres { get; set; }
+        public PublicationGenreView PublicationGenres { get; set; }
 
-        public List<PublicationAuthor> PublicationAuthors { get; } = new List<PublicationAuthor>();
+        public ICollection<GetAuthorView> Authors { get; set; }
     }
 }

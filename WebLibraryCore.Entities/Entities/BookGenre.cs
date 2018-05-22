@@ -11,11 +11,6 @@ namespace WebLibraryCore.Entities.Entities
         public int GenreID { get; set; }
         public string GenreName { get; set; }
 
-        public IEnumerable<Book> Books { get; set; }
-
-        public BookGenre()
-        {
-            Books = new List<Book>();
-        }
+        public IEnumerable<Book> Books { get; } = new List<Book>();
     }
 }

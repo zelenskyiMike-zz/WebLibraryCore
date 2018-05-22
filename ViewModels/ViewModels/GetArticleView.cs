@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace WebLibraryCore.Entities.Entities
+namespace WebLibraryCore.ViewModels.ViewModels
 {
-    public class Article
+    public class GetArticleView
     {
-        [Key]
         public int ArticleID { get; set; }
         [Required]
         public int ArticleGenreID { get; set; }
@@ -17,8 +16,8 @@ namespace WebLibraryCore.Entities.Entities
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateOfArticlePublish { get; set; }
 
-        public ArticleGenre ArticleGenres { get; set; }
+        public ArticleGenreView ArticleGenres { get; set; }
 
-        public List<ArticleAuthor> ArticleAuthors { get; } = new List<ArticleAuthor>();
+        public ICollection<GetAuthorView> Authors { get; set; } 
     }
 }

@@ -4,8 +4,7 @@ using System.Text;
 
 namespace WebLibraryCore.ViewModels.ViewModels
 {
-    public class BookView
+    public class BookGenreView
     {
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using WebLibraryCore.BusinessLogic.MappingProfiles;
 
 namespace WebLibraryCore.BusinessLogic
 {
@@ -9,12 +10,10 @@ namespace WebLibraryCore.BusinessLogic
             Mapper.Initialize(cfg =>
             {
                 //cfg.AddProfile<AuthorMappingProfile>();
-                //cfg.AddProfile<BookMappingProfile>();
-                //cfg.AddProfile<BookGenresMappingProfile>();
-                //cfg.AddProfile<ArticleMappingProfile>();
-                //cfg.AddProfile<MagazineMappingProfile>();
-                //cfg.AddProfile<PublicationMappingProfile>();
-                //cfg.AddProfile<PublicationGenresMappingProfile>();
+                cfg.AddProfile<BookMappingProfile>();
+                cfg.AddProfile<ArticleMappingProfile>();
+                cfg.AddProfile<MagazineMappingProfile>();
+                cfg.AddProfile<PublicationMappingProfile>();
             });
 
         }

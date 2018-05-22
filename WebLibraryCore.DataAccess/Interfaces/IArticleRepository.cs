@@ -10,6 +10,6 @@ namespace WebLibraryCore.DataAccess.Interfaces
     {
         IEnumerable<Article> GetAllArticlesWithGenres();
         Task<Article> GetArticleDetails(int id);
-        IEnumerable<Author> GetAuthorsNotExistInArticles(Article entity);
+        IEnumerable<Author> GetAuthorsNotExistInArticle(Article entity);
     }
 }

@@ -85,26 +85,5 @@ namespace WebLibraryCore.DataAccess.Repository
             }
             return finalListOfPublication;
         }
-
-        //public async Task<Author> GetAuthorsDetails(int id)
-        //{
-        //    var author = await GetByID(id);
-        //    List<Book> booksList = author.BookAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Books).ToList();
-        //    List<Article> articlesList = author.ArticleAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Articles).ToList();
-        //    List<Magazine> magazinesList = author.MagazineAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Magazines).ToList();
-        //    List<Publication> publicationsList = author.PublicationAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Publications).ToList();
-
-        //    Author authorVM = new Author()
-        //    {
-        //        AuthorID = author.AuthorID,
-        //        AuthorName = author.AuthorName,
-        //        Books = booksList,
-        //        Articles = articlesList,
-        //        Magazines = magazinesList,
-        //        Publications = publicationsList
-        //    };
-        //    return authorVM;
-        //}
-
     }
 }

@@ -23,7 +23,7 @@ namespace WebLibraryCore.DataAccess.Repository
             return context.Articles.Include(g => g.ArticleGenres);
         }
 
-        public IEnumerable<Author> GetAuthorsNotExistInArticles(Article entity)
+        public IEnumerable<Author> GetAuthorsNotExistInArticle(Article entity)
         {
             var initBookAuthorList = entity.ArticleAuthors.Where(x => x.ArticleID == entity.ArticleID).Select(x => x.Authors).ToList();
             //context.BookAuthors.Where(x => x.BookID == book.BookID).Select(x => x.Authors).ToList();

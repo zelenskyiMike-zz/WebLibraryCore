@@ -34,25 +34,10 @@ namespace WebLibraryCore.DataAccess.Repository
             await context.SaveChangesAsync();
         }
 
-        //public System.Linq.IQueryable<TEntity> GetAllWithGenres()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public IEnumerable<Author> GetAuthorsNotExistHere(TEntity entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public async Task<TEntity> GetByID(int id)
         {
             return await context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync();
         }
-
-        //public asyn Task<TEntity> GetDetails(int id)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
     }
 }

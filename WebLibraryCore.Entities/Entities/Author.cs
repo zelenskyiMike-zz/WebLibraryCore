@@ -14,15 +14,12 @@ namespace WebLibraryCore.Entities.Entities
         [Required(ErrorMessage = "Необходимо ввести имя и фамилию автора")]
         public string AuthorName { get; set; }
 
-        public virtual ICollection<BookAuthor> BookAuthors { get; } = new List<BookAuthor>();
+        public IEnumerable<BookAuthor> BookAuthors { get; } = new List<BookAuthor>();
+        public IEnumerable<PublicationAuthor> PublicationAuthors { get; } = new List<PublicationAuthor>();
+        public IEnumerable<MagazineAuthor> MagazineAuthors { get; } = new List<MagazineAuthor>();
+        public IEnumerable<ArticleAuthor> ArticleAuthors { get; } = new List<ArticleAuthor>();
 
-        public virtual ICollection<PublicationAuthor> PublicationAuthors { get; } = new List<PublicationAuthor>();
-
-        public virtual ICollection<MagazineAuthor> MagazineAuthors { get; } = new List<MagazineAuthor>();
-
-        public virtual ICollection<ArticleAuthor> ArticleAuthors { get; } = new List<ArticleAuthor>();
-
-        [NotMapped]
-        public List<int> BooksIDs { get; set; }
+        //[NotMapped]
+        //public List<int> BooksIDs { get; set; }
     }
 }

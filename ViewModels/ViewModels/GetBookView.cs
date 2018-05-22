@@ -4,11 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace WebLibraryCore.Entities.Entities
+namespace WebLibraryCore.ViewModels.ViewModels
 {
-    public class Book
+    public class GetBookView
     {
-        [Key]
         public int BookID { get; set; }
         public int GenreID { get; set; }
 
@@ -16,13 +15,8 @@ namespace WebLibraryCore.Entities.Entities
         public string BookName { get; set; }
         public int YearOfPublish { get; set; }
 
-        public BookGenre BookGenres { get; set; }
+        public BookGenreView BookGenres { get; set; }
 
-        public IEnumerable<BookAuthor> BookAuthors { get; } = new List<BookAuthor>();
-
-
-        //Not Shure
-        //[NotMapped]
-        //public List<int> AuthorsIDs { get; set; }
+        public ICollection<GetAuthorView> Authors { get; set; }
     }
 }

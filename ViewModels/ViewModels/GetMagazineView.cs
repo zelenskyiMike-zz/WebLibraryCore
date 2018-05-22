@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace WebLibraryCore.Entities.Entities
+namespace WebLibraryCore.ViewModels.ViewModels
 {
-    public class Magazine
+    public class GetMagazineView
     {
-        [Key]
         public int MagazineID { get; set; }
         [Required]
         public int MagazineGenreID { get; set; }
@@ -18,11 +16,8 @@ namespace WebLibraryCore.Entities.Entities
         [DataType(DataType.Date)]
         public DateTime DateOfMagazinePublish { get; set; }
 
-        public MagazineGenre MagazineGenres { get; set; }
+        public MagazineGenreView MagazineGenres { get; set; }
 
-        public List<MagazineAuthor> MagazineAuthors { get; } = new List<MagazineAuthor>();
-
-        //[NotMapped]
-        //public List<int> AuthorsIDs { get; set; }
+        public ICollection<GetAuthorView> Authors { get; set; }
     }
 }

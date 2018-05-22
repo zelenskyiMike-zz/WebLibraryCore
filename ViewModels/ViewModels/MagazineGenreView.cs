@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace WebLibraryCore.Entities.Entities
+namespace WebLibraryCore.ViewModels.ViewModels
 {
-    public class MagazineGenre
+    public class MagazineGenreView
     {
-        [Key]
         public int MagazineGenreID { get; set; }
         [Required]
         public string MagazineGenreName { get; set; }
 
-        public List<Magazine> Magazines { get; } = new List<Magazine>();
+        public ICollection<GetMagazineView> Magazines { get; set; }
 
     }
 }

@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace WebLibraryCore.Entities.Entities
+namespace WebLibraryCore.ViewModels.ViewModels
 {
-    public class PublicationGenre
+    public class PublicationGenreView
     {
-        [Key]
         public int PublicationGenreID { get; set; }
         [Required]
         public string PublicationGenreName { get; set; }
 
-        public List<Publication> Publications { get; } = new List<Publication>();
+        public ICollection<GetPublicationView> Publications { get; set; }
     }
 }
