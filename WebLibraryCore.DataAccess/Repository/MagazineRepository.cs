@@ -9,7 +9,7 @@ using WebLibraryCore.Entities.Entities;
 
 namespace WebLibraryCore.DataAccess.Repository
 {
-    public class MagazineRepository : GenericRepository<Magazine>,IMagazieRepository
+    public class MagazineRepository : GenericRepository<Magazine>,IMagazineRepository
     {
         private readonly EFDbContext context;
 

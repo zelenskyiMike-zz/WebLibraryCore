@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebLibraryCore.BusinessLogic;
+using WebLibraryCore.BusinessLogic.Services;
 using WebLibraryCore.DataAccess;
+using WebLibraryCore.DataAccess.Interfaces;
+using WebLibraryCore.DataAccess.Repository;
+using WebLibraryCore.ViewModels.ViewModels;
 
 namespace WebLibraryCore
 {
@@ -26,8 +32,25 @@ namespace WebLibraryCore
     {
       string conectionString = Configuration.GetConnectionString("DefaultConnection");
       services.AddDbContext<EFDbContext>(options => options.UseSqlServer(conectionString));
+
+
+      //services.AddScoped<IGenericRepository<GetBookView>, GenericRepository<GetBookView>>();
+      //services.AddScoped<IGenericRepository<GetArticleView>, GenericRepository<GetArticleView>>();
+      //services.AddScoped<IGenericRepository<GetMagazineView>, GenericRepository<GetMagazineView>>();
+      //services.AddScoped<IGenericRepository<GetPublicationView>, GenericRepository<GetPublicationView>>();
+      //services.AddScoped<IGenericRepository<GetAuthorView>, GenericRepository<GetAuthorView>>();
+
+      //services.AddScoped<IBookRepository, BookRepository>();
+      //services.AddScoped<IMagazineRepository, MagazineRepository>();
+      //services.AddScoped<IArticleRepository, ArticleRepository>();
+      //services.AddScoped<IPublicationRepository, PublicationRepository>();
+      //services.AddScoped<IAuthorRepository, AuthorRepository>();
+
+      services.AddScoped<BookService>();
+
+      services.AddAutoMapper();
       services.AddMvc();
-      
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

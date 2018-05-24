@@ -11,12 +11,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ViewModels\WebLibraryCore.ViewModels.csproj" />
+    <ProjectReference Include="..\WebLibraryCore.BusinessLogic\WebLibraryCore.BusinessLogic.csproj" />
     <ProjectReference Include="..\WebLibraryCore.DataAccess\WebLibraryCore.DataAccess.csproj" />
   </ItemGroup>
 

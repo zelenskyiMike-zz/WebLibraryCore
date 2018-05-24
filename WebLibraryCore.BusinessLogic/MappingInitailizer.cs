@@ -9,13 +9,13 @@ namespace WebLibraryCore.BusinessLogic
         {
             Mapper.Initialize(cfg =>
             {
-                //cfg.AddProfile<AuthorMappingProfile>();
+                cfg.AddProfile<AuthorMappingProfile>();
                 cfg.AddProfile<BookMappingProfile>();
                 cfg.AddProfile<ArticleMappingProfile>();
                 cfg.AddProfile<MagazineMappingProfile>();
                 cfg.AddProfile<PublicationMappingProfile>();
             });
-
+            Mapper.Configuration.AssertConfigurationIsValid();
         }
     }
 }

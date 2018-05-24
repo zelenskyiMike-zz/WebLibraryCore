@@ -15,6 +15,7 @@ namespace WebLibraryCore.ViewModels.ViewModels
         public string BookName { get; set; }
         public int YearOfPublish { get; set; }
 
+        [NotMapped]
         public BookGenreView BookGenres { get; set; }
 
         public ICollection<GetAuthorView> Authors { get; set; }

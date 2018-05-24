@@ -6,7 +6,7 @@ using WebLibraryCore.Entities.Entities;
 
 namespace WebLibraryCore.DataAccess.Interfaces
 {
-    public interface IMagazieRepository
+    public interface IMagazineRepository
     {
         IEnumerable<Magazine> GetAllMagazinesWithGenres();
         Task<Magazine> GetMagazineDetails(int id);

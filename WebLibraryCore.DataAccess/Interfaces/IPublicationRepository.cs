@@ -7,7 +7,7 @@ using WebLibraryCore.Entities.Entities;
 
 namespace WebLibraryCore.DataAccess.Interfaces
 {
-    public interface IPublictionRepository
+    public interface IPublicationRepository
     {
         IEnumerable<Publication> GetAllPublicationsWithGenres();
         Task<Publication> GetPublicationDetails(int id);
