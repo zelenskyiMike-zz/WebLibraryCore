@@ -1,0 +1,22 @@
+<div>
+  <a routerLink="/create" class="nav-link">Добавить</a>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <td>Название</td>
+      <td>Год выпуска</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of boooks">
+      <td>{{book?.bookName}}</td>
+      <td>{{book?.yearOfPublish}}</td>
+      <td>
+        <a [routerLink]="['edit', book.bookID]" class="btn btn-sm btn-primary">Изменить</a>
+        <button (click)="delete(book.bookID)" class="btn btn-sm btn-danger">Удалить</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

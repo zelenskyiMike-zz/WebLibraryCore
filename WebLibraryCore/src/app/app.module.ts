@@ -3,16 +3,39 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { Routes, RouterModule } from '@angular/router';
+
+import { BookComponent } from './book/book.component';
+import { BookListComponent } from './book/book-list.component';
+import { BookCreateComponent } from './book/book-create.component';
+import { BookEditComponent } from './book/book-edit.component';
+import { NotFoundComponent } from './book/not-found.component';
+
+import { DataBookService } from './book/data.bookService';
+
+const appRoutes: Routes = [
+  { path: '', component: BookListComponent },
+  { path: 'create', component: BookCreateComponent },
+  { path: 'edit/:id', component: BookEditComponent },
+  { path: '**', component: NotFoundComponent }
+];
+
 @NgModule({
-   declarations: [
-      AppComponent
-   ],
-   imports: [
-      BrowserModule,
-      FormsModule,
-      HttpModule
-   ],
-   providers: [],
-   bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    BookComponent,
+    BookListComponent,
+    BookCreateComponent,
+    BookEditComponent,
+    NotFoundComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    RouterModule.forRoot(appRoutes)
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

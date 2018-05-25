@@ -19,6 +19,7 @@ namespace WebLibraryCore.WebUI.Controllers
     {
       this.bookService = bookService;
     }
+
     // GET: api/Book
     [HttpGet]
     public IEnumerable<GetBookView> GetAll()

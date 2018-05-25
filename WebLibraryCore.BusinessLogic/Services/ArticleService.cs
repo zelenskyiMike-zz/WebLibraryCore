@@ -10,7 +10,7 @@ using WebLibraryCore.ViewModels.ViewModels;
 
 namespace WebLibraryCore.BusinessLogic.Services
 {
-    class ArticleService
+    public class ArticleService
     {
         private readonly EFDbContext context;
         private readonly ArticleRepository articleRepository;

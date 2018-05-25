@@ -33,20 +33,10 @@ namespace WebLibraryCore
       string conectionString = Configuration.GetConnectionString("DefaultConnection");
       services.AddDbContext<EFDbContext>(options => options.UseSqlServer(conectionString));
 
-
-      //services.AddScoped<IGenericRepository<GetBookView>, GenericRepository<GetBookView>>();
-      //services.AddScoped<IGenericRepository<GetArticleView>, GenericRepository<GetArticleView>>();
-      //services.AddScoped<IGenericRepository<GetMagazineView>, GenericRepository<GetMagazineView>>();
-      //services.AddScoped<IGenericRepository<GetPublicationView>, GenericRepository<GetPublicationView>>();
-      //services.AddScoped<IGenericRepository<GetAuthorView>, GenericRepository<GetAuthorView>>();
-
-      //services.AddScoped<IBookRepository, BookRepository>();
-      //services.AddScoped<IMagazineRepository, MagazineRepository>();
-      //services.AddScoped<IArticleRepository, ArticleRepository>();
-      //services.AddScoped<IPublicationRepository, PublicationRepository>();
-      //services.AddScoped<IAuthorRepository, AuthorRepository>();
-
       services.AddScoped<BookService>();
+      services.AddScoped<ArticleService>();
+      services.AddScoped<MagazineService>();
+      services.AddScoped<PublicationService>();
 
       services.AddAutoMapper();
       services.AddMvc();

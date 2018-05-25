@@ -1,46 +1,64 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebLibraryCore.BusinessLogic.Services;
+using WebLibraryCore.ViewModels.ViewModels;
 
 namespace WebLibraryCore.WebUI.Controllers
 {
-    [Produces("application/json")]
-    [Route("api/Article")]
-    public class ArticleController : Controller
-    {
-        // GET: api/Article
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+  [Produces("application/json")]
+  [Route("api/Article")]
+  public class ArticleController : Controller
+  {
+    private readonly ArticleService articleService;
 
-        // GET: api/Article/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-        
-        // POST: api/Article
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-        
-        // PUT: api/Article/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-        
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+    public ArticleController(ArticleService articleService)
+    {
+      this.articleService = articleService;
     }
+
+    // GET: api/Article
+    [HttpGet]
+    public IEnumerable<GetArticleView> GetAll()
+    {
+      return articleService.GetAllArticlesWithGenres();
+    }
+
+    // GET: api/Article/5
+    [HttpGet("{id}")]
+    public async Task<GetArticleView> Get(int id)
+    {
+      return await articleService.GetArticleDetails(id);
+    }
+
+    // POST: api/Article
+    [HttpPost]
+    public IActionResult Post(GetArticleView article)
+    {
+      articleService.Create(article);
+
+      return Ok(article);
+    }
+
+    // PUT: api/Article/5
+    [HttpPut("{id}")]
+    public IActionResult Put(int id, [FromBody]GetArticleView article)
+    {
+      articleService.Update(article);
+
+      return Ok(article);
+    }
+
+    // DELETE: api/ApiWithActions/5
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+      articleService.Delete(id);
+
+      return Ok(id);
+    }
+  }
 }
