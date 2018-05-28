@@ -7,7 +7,7 @@ import { Book } from './book';
 })
 export class BookListComponent implements OnInit {
 
-  books: Book[];
+  books: any;
   constructor(private dataService: DataBookService) { }
 
   ngOnInit() {
