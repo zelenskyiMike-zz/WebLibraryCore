@@ -1,4 +1,4 @@
-<div>
+<!--<div>
   <a routerLink="/create" class="nav-link">Добавить</a>
 </div>
 <table class="table table-striped">
@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let book of boooks">
+    <tr *ngFor="let book of books">
       <td>{{book?.bookName}}</td>
       <td>{{book?.yearOfPublish}}</td>
       <td>
@@ -19,4 +19,12 @@
       </td>
     </tr>
   </tbody>
-</table>
+</table>-->
+<div class="container-fluid text-center pb-5">
+  <div class="row">
+    <app-book class="text-center"></app-book>
+    <app-book class="text-center"></app-book>
+    <app-book class="text-center"></app-book>
+    <app-book class="text-center"></app-book>
+  </div>
+</div>

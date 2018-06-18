@@ -4,7 +4,7 @@ import { Book } from './book';
 
 @Injectable()
 export class DataBookService{
-    private url = "/api/Book";
+    private url = "/Book";
 
 constructor(private http: HttpClient) {}
 

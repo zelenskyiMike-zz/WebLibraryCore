@@ -1,7 +1,6 @@
 <div *ngIf="loaded">
   <h2>Изменение данных о книге</h2>
-  <book-form [(book)]="book"></book-form>
-  <div class="form-group">
+  <div class="form-group" [(book)]="book">
     <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
   </div>
 </div>
