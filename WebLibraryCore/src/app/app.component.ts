@@ -9,12 +9,11 @@ export class AppComponent implements OnInit {
   title = 'TITLE';
   constructor(private _httpService: Http) { }
 
-    apiValues: string[] = [];
+    //apiValues: string[] = [];
     ngOnInit() {
-        this._httpService.get('/api').subscribe(values => {
-            this.apiValues = values.json() as string[];
-      });
-      console.warn(XHRBackend.toString());
+    //    this._httpService.get('/api').subscribe(values => {
+    //        this.apiValues = values.json() as string[];
+      //});
   }
 
 }

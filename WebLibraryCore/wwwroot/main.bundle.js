@@ -52,14 +52,12 @@ var AppComponent = /** @class */ (function () {
     function AppComponent(_httpService) {
         this._httpService = _httpService;
         this.title = 'TITLE';
-        this.apiValues = [];
     }
+    //apiValues: string[] = [];
     AppComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this._httpService.get('/api').subscribe(function (values) {
-            _this.apiValues = values.json();
-        });
-        console.warn(http_1.XHRBackend.toString());
+        //    this._httpService.get('/api').subscribe(values => {
+        //        this.apiValues = values.json() as string[];
+        //});
     };
     AppComponent = __decorate([
         core_1.Component({
@@ -135,7 +133,7 @@ exports.AppModule = AppModule;
 /***/ "./src/app/book/book.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group\">\r\n  <label>Название</label>\r\n\r\n\r\n  <input type=\"text\" [(ngModel)]=\"book.bookName\" class=\"form-control col-4\" />\r\n\r\n</div>\r\n<div class=\"form-group\">\r\n  <label>Дата випуска</label>\r\n  <input type=\"text\" [(ngModel)]=\"book.yearOfPublish\" class=\"form-control col-4\" />\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"form-group\">\r\n  <label>Название</label>\r\n\r\n\r\n  <!--<input type=\"text\" [(ngModel)]=\"book.BookID\" class=\"form-control col-4\" />\r\n  <p>here is {{ book}}</p>\r\n  <p>here is {{ book.BookID}}</p>-->\r\n\r\n  <ul *ngFor=\"let book of books$ | async\">\r\n    <li>{{e.BookName}}</li>\r\n  </ul>\r\n</div>\r\n<!--<div class=\"form-group\">\r\n  <label>Дата випуска</label>\r\n  <input type=\"text\" [(ngModel)]=\"book.YearOfPublish\" class=\"form-control col-4\" />\r\n</div>-->\r\n\r\n"
 
 /***/ }),
 
@@ -155,18 +153,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var data_bookService_1 = __webpack_require__("./src/app/book/data.bookService.ts");
 var BookComponent = /** @class */ (function () {
-    function BookComponent() {
+    //public book : book;
+    function BookComponent(dataService) {
+        this.dataService = dataService;
+        // this.book = new book();
     }
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object)
-    ], BookComponent.prototype, "book", void 0);
+    BookComponent.prototype.ngOnInit = function () {
+        //this.dataService.getBooks().subscribe((tempdate) => {
+        //  this.book; /////////////////
+        //}), err => {
+        //  console.log(err);
+        //}
+        this.books$ = this.dataService.getBooks();
+    };
     BookComponent = __decorate([
         core_1.Component({
             selector: 'app-book',
             template: __webpack_require__("./src/app/book/book.component.html")
-        })
+        }),
+        __metadata("design:paramtypes", [data_bookService_1.DataBookService])
     ], BookComponent);
     return BookComponent;
 }());
@@ -192,13 +199,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+__webpack_require__("./node_modules/rxjs/_esm5/add/operator/map.js");
 var DataBookService = /** @class */ (function () {
     function DataBookService(http) {
         this.http = http;
         this.url = "/Book";
     }
     DataBookService.prototype.getBooks = function () {
-        return this.http.get(this.url);
+        return this.http.get(this.url).map(function (response) { return response.json().book; }); //.subscribe(
+        //res => {
+        //  console.log(res);
+        //},
+        //(err: HttpErrorResponse) => {
+        //  console.log(err.error);
+        //  console.log(err.name);
+        //  console.log(err.message);
+        //  console.log(err.status);
+        //});
+        //this.http.get(this.url).subscribe((data: Response) => {
+        //  this.getBooks = data.json();
+        //  this.getBooks = Array.of(this.getBooks);
+        //})
     };
     DataBookService.prototype.getBook = function (id) {
         return this.http.get(this.url + '/' + id);
@@ -207,7 +228,7 @@ var DataBookService = /** @class */ (function () {
         return this.http.post(this.url, book);
     };
     DataBookService.prototype.updateBook = function (book) {
-        return this.http.put(this.url + '/' + book.bookID, book);
+        return this.http.put(this.url + '/' + book.BookID, book);
     };
     DataBookService.prototype.deleteBook = function (id) {
         return this.http.delete(this.url + '/' + id);
