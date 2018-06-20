@@ -7,12 +7,11 @@ import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 
 import { BookComponent } from './book/book.component';
-//import { BookListComponent } from './book/book-list.component';
-//import { BookCreateComponent } from './book/book-create.component';
-//import { BookEditComponent } from './book/book-edit.component';
-//import { NotFoundComponent } from './book/not-found.component';
+//import { MagazineComponent } from './magazine/magazine.component';
 import { AppComponent } from './app.component';
 import { DataBookService } from './book/data.bookService';
+//import { DataMagazineService } from './magazine/data.magazineService';
+
 
 //const appRoutes: Routes = [
 //  { path: '', component: BookListComponent },
@@ -25,10 +24,7 @@ import { DataBookService } from './book/data.bookService';
   declarations: [
     AppComponent,
     BookComponent,
-    //BookListComponent
-    //BookCreateComponent,
-    //BookEditComponent,
-    //NotFoundComponent
+    //MagazineComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +33,7 @@ import { DataBookService } from './book/data.bookService';
     HttpModule,
     //RouterModule.forRoot(appRoutes)
   ],
-  providers: [DataBookService],
-  bootstrap: [AppComponent, BookComponent/*, BookListComponent*/]
+  providers: [DataBookService/*, DataMagazineService*/],
+  bootstrap: [AppComponent, BookComponent/*, MagazineComponent*/]
 })
 export class AppModule { }

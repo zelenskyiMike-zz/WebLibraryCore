@@ -27,7 +27,7 @@ module.exports = ""
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<div style=\"text-align:center\">\r\n  <img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\r\n</div>\r\n<h2>Here are some links to help you start: </h2>\r\n<ul>\r\n  <li>\r\n    <h2><a target=\"_blank\" rel=\"noopener\" href=\"https://angular.io/tutorial\">Tour of Heroes</a></h2>\r\n  </li>\r\n  <li>\r\n    <h2><a target=\"_blank\" rel=\"noopener\" href=\"https://github.com/angular/angular-cli/wiki\">CLI Documentation</a></h2>\r\n  </li>\r\n  <li>\r\n    <h2>Here is my {{title}}</h2>\r\n  </li>\r\n</ul>\r\n\r\n<app-book></app-book>\r\n\r\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<div style=\"text-align:center\">\r\n  <img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\r\n</div>\r\n<h2>Here are some links to help you start: </h2>\r\n<ul>\r\n  <li>\r\n    <h2><a target=\"_blank\" rel=\"noopener\" href=\"https://angular.io/tutorial\">Tour of Heroes</a></h2>\r\n  </li>\r\n  <li>\r\n    <h2><a target=\"_blank\" rel=\"noopener\" href=\"https://github.com/angular/angular-cli/wiki\">CLI Documentation</a></h2>\r\n  </li>\r\n  <li>\r\n    <h2>Here is my {{title}}</h2>\r\n  </li>\r\n</ul>\r\n\r\n<app-book></app-book>\r\n<!--<app-magazine></app-magazine>-->\r\n\r\n"
 
 /***/ }),
 
@@ -52,11 +52,18 @@ var AppComponent = /** @class */ (function () {
     function AppComponent(_httpService) {
         this._httpService = _httpService;
         this.title = 'TITLE';
+        this.apiValues = [];
     }
-    //apiValues: string[] = [];
     AppComponent.prototype.ngOnInit = function () {
-        //    this._httpService.get('/api').subscribe(values => {
-        //        this.apiValues = values.json() as string[];
+        var _this = this;
+        this._httpService.get('/api/Book').subscribe(function (values) {
+            _this.apiValues = values.json();
+        });
+        //this._httpService.get('/api/Article').subscribe(values => {
+        //  this.apiValues = values.json() as string[];
+        //});
+        //this._httpService.get('/api/Magazine/1').subscribe(values => {
+        //  this.apiValues = values.json() as string[];
         //});
     };
     AppComponent = __decorate([
@@ -92,12 +99,10 @@ var forms_1 = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js")
 var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var http_2 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
 var book_component_1 = __webpack_require__("./src/app/book/book.component.ts");
-//import { BookListComponent } from './book/book-list.component';
-//import { BookCreateComponent } from './book/book-create.component';
-//import { BookEditComponent } from './book/book-edit.component';
-//import { NotFoundComponent } from './book/not-found.component';
+//import { MagazineComponent } from './magazine/magazine.component';
 var app_component_1 = __webpack_require__("./src/app/app.component.ts");
 var data_bookService_1 = __webpack_require__("./src/app/book/data.bookService.ts");
+//import { DataMagazineService } from './magazine/data.magazineService';
 //const appRoutes: Routes = [
 //  { path: '', component: BookListComponent },
 //  { path: 'create', component: BookCreateComponent },
@@ -119,8 +124,8 @@ var AppModule = /** @class */ (function () {
                 http_1.HttpClientModule,
                 http_2.HttpModule,
             ],
-            providers: [data_bookService_1.DataBookService],
-            bootstrap: [app_component_1.AppComponent, book_component_1.BookComponent /*, BookListComponent*/]
+            providers: [data_bookService_1.DataBookService /*, DataMagazineService*/],
+            bootstrap: [app_component_1.AppComponent, book_component_1.BookComponent /*, MagazineComponent*/]
         })
     ], AppModule);
     return AppModule;
@@ -133,7 +138,7 @@ exports.AppModule = AppModule;
 /***/ "./src/app/book/book.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group\">\r\n  <label>Название</label>\r\n\r\n\r\n  <!--<input type=\"text\" [(ngModel)]=\"book.BookID\" class=\"form-control col-4\" />\r\n  <p>here is {{ book}}</p>\r\n  <p>here is {{ book.BookID}}</p>-->\r\n\r\n  <ul *ngFor=\"let book of books$ | async\">\r\n    <li>{{e.BookName}}</li>\r\n  </ul>\r\n</div>\r\n<!--<div class=\"form-group\">\r\n  <label>Дата випуска</label>\r\n  <input type=\"text\" [(ngModel)]=\"book.YearOfPublish\" class=\"form-control col-4\" />\r\n</div>-->\r\n\r\n"
+module.exports = "<div class=\"form-group\">\r\n  <label>Название Books</label>\r\n\r\n\r\n  <input type=\"text\" [(ngModel)]=\"book.BookID\" class=\"form-control col-4\" />\r\n  <p>here is {{ book}}</p>\r\n  <p>here is {{ book.BookID}}</p>\r\n\r\n  <ul *ngFor=\"let e of books$\">\r\n    <li>{{e.BookName}}</li>\r\n    <li>{{e.BookID}}</li>\r\n  </ul>\r\n</div>\r\n<!--<div class=\"form-group\">\r\n  <label>Дата випуска</label>\r\n  <input type=\"text\" [(ngModel)]=\"book.YearOfPublish\" class=\"form-control col-4\" />\r\n</div>-->\r\n\r\n"
 
 /***/ }),
 
@@ -153,20 +158,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var book_1 = __webpack_require__("./src/app/book/book.ts");
 var data_bookService_1 = __webpack_require__("./src/app/book/data.bookService.ts");
 var BookComponent = /** @class */ (function () {
-    //public book : book;
     function BookComponent(dataService) {
         this.dataService = dataService;
-        // this.book = new book();
+        this.book = new book_1.book();
     }
     BookComponent.prototype.ngOnInit = function () {
-        //this.dataService.getBooks().subscribe((tempdate) => {
-        //  this.book; /////////////////
-        //}), err => {
-        //  console.log(err);
-        //}
-        this.books$ = this.dataService.getBooks();
+        var _this = this;
+        this.dataService.getBooks().subscribe(function (book) { return _this.book = book; });
+        // console.log(this.dataService.getBooks().subscribe(book => this.book = book));
     };
     BookComponent = __decorate([
         core_1.Component({
@@ -178,6 +180,22 @@ var BookComponent = /** @class */ (function () {
     return BookComponent;
 }());
 exports.BookComponent = BookComponent;
+
+
+/***/ }),
+
+/***/ "./src/app/book/book.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var book = /** @class */ (function () {
+    function book() {
+    }
+    return book;
+}());
+exports.book = book;
 
 
 /***/ }),
@@ -203,10 +221,12 @@ __webpack_require__("./node_modules/rxjs/_esm5/add/operator/map.js");
 var DataBookService = /** @class */ (function () {
     function DataBookService(http) {
         this.http = http;
-        this.url = "/Book";
+        this.url = "api/Book";
+        this.headers = new http_1.HttpHeaders({ 'Content-Type': 'application/json' });
+        this.options = { headers: this.headers };
     }
     DataBookService.prototype.getBooks = function () {
-        return this.http.get(this.url).map(function (response) { return response.json().book; }); //.subscribe(
+        return this.http.get(this.url, this.options) /*.map((response: Response) => response.json())*/; //.subscribe(
         //res => {
         //  console.log(res);
         //},

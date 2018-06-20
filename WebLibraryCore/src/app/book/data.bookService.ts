@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { book } from './book';
 import 'rxjs/add/operator/map';
 import { Http, Response } from '@angular/http';
 
 @Injectable()
 export class DataBookService {
-  private url = "/Book";
+  private url = "api/Book";
 
   constructor(private http: HttpClient) { }
 
+  headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  options = { headers: this.headers };
+
   getBooks() {
 
-    return this.http.get(this.url).map((response: Response) => response.json().book);//.subscribe(
+    return this.http.get(this.url, this.options )/*.map((response: Response) => response.json())*/;//.subscribe(
       //res => {
       //  console.log(res);
       //},

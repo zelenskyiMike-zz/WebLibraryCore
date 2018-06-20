@@ -9,10 +9,16 @@ export class AppComponent implements OnInit {
   title = 'TITLE';
   constructor(private _httpService: Http) { }
 
-    //apiValues: string[] = [];
+    apiValues: string[] = [];
     ngOnInit() {
-    //    this._httpService.get('/api').subscribe(values => {
-    //        this.apiValues = values.json() as string[];
+        this._httpService.get('/api/Book').subscribe(values => {
+            this.apiValues = values.json() as string[];
+      });
+      //this._httpService.get('/api/Article').subscribe(values => {
+      //  this.apiValues = values.json() as string[];
+      //});
+      //this._httpService.get('/api/Magazine/1').subscribe(values => {
+      //  this.apiValues = values.json() as string[];
       //});
   }
 

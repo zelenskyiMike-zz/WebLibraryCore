@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { book } from './book';
 import { DataBookService } from './data.bookService';
 import { Observable } from "rxjs/Rx";
+import { HttpHeaders } from "@angular/common/http";
+
 
 @Component({
   selector: 'app-book',
@@ -10,20 +12,19 @@ import { Observable } from "rxjs/Rx";
 
 export class BookComponent {
 
-  public books$: Observable<book[]>;
-  //public book : book;
+ // public books$: Observable<Object[]>;
+  public book : book;
 
-  constructor(private dataService: DataBookService) {
-   // this.book = new book();
+  constructor(private dataService: DataBookService) { 
+    this.book = new book();
+  }
+
+  ngOnInit() {
+    this.dataService.getBooks().subscribe(book => this.book = book);
+   // console.log(this.dataService.getBooks().subscribe(book => this.book = book));
+
   }
   
-  ngOnInit() {
-    //this.dataService.getBooks().subscribe((tempdate) => {
-    //  this.book; /////////////////
-    //}), err => {
-    //  console.log(err);
-    //}
-
-    this.books$ = this.dataService.getBooks(); 
+    //books$ = this.dataService.getBooks(); 
   }
-}
+
