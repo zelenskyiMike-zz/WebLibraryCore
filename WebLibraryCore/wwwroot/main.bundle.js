@@ -138,7 +138,7 @@ exports.AppModule = AppModule;
 /***/ "./src/app/book/book.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group\">\r\n  <label>Название Books</label>\r\n\r\n\r\n  <!--<input type=\"text\" [(ngModel)]=\"book.BookID\" class=\"form-control col-4\" />-->\r\n  <p>here is {{ book.BookID}}</p><br />\r\n  <!--<p>here is {{ book.BookID}}</p>-->\r\n\r\n  <ul *ngFor=\"let e of books\" >\r\n    <li>{{e.BookName}}</li>\r\n    <li>{{e.BookID}}</li>\r\n  </ul>\r\n</div>\r\n<!--<div class=\"form-group\">\r\n  <label>Дата випуска</label>\r\n  <input type=\"text\" [(ngModel)]=\"book.YearOfPublish\" class=\"form-control col-4\" />\r\n</div>-->\r\n\r\n"
+module.exports = "<div class=\"form-group\">\r\n  <label>Название Books</label>\r\n\r\n\r\n  <!--<input type=\"text\" [(ngModel)]=\"book.BookID\" class=\"form-control col-4\" />-->\r\n  <p>here is {{ book.BookID}}</p><br />\r\n  <!--<p>here is {{ book.BookID}}</p>-->\r\n\r\n  <ul *ngFor=\"let e of books\" >\r\n\r\n      <li>{{e.BookName}}</li>\r\n      <li>{{e.BookID}}</li>\r\n \r\n  </ul>\r\n</div>\r\n<!--<div class=\"form-group\">\r\n  <label>Дата випуска</label>\r\n  <input type=\"text\" [(ngModel)]=\"book.YearOfPublish\" class=\"form-control col-4\" />\r\n</div>-->\r\n\r\n"
 
 /***/ }),
 
@@ -165,13 +165,9 @@ var BookComponent = /** @class */ (function () {
         this.book = new Array();
     }
     BookComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.dataService.getBooks().subscribe(function (data) {
-            _this.book = data;
-        });
-        console.log(this.dataService.getBooks().subscribe(function (data) {
-            _this.book = data;
-        }));
+        this.dataService.getBooks().map(function (res) { return res.json().book; });
+        //.subscribe((data: Book[]) => { this.book = data;});
+        console.log(this.book.values);
     };
     BookComponent = __decorate([
         core_1.Component({

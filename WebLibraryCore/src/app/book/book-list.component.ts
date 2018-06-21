@@ -3,7 +3,7 @@ import { DataBookService } from './data.bookService';
 import { Book } from './book';
 
 @Component({
-  //selector: 'app-books-list',
+  selector: 'app-books-list',
   templateUrl: './book-list.component.html'
 })
 export class BookListComponent implements OnInit {
