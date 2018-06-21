@@ -27,19 +27,8 @@ namespace WebLibraryCore.WebUI.Controllers
       return bookService.GetAllBooksWithGenres();
     }
 
-    /* // GET: api/Book
-    [HttpGet]
-    public string GetAll()
-    {
-      var jsonResult = JsonConvert.SerializeObject(bookService.GetAllBooksWithGenres(), Formatting.Indented);
-      return jsonResult;
-        //new JsonResult( bookService.GetAllBooksWithGenres(), DefaultJsonSettings);
-    }
-
-     */
-
     // GET: api/Book/5
-    [HttpGet]
+    [HttpGet ("{id}")]
     public async Task<GetBookView> Get(int id)
     {
       return await bookService.GetBookDetails(id);

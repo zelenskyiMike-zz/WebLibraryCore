@@ -44,7 +44,7 @@ namespace WebLibraryCore.DataAccess.Repository
             var book = await GetByID(id);
             BookGenre genre = context.BookGenres.Where(x => x.GenreID == book.GenreID).SingleOrDefault();
 
-            //var authorList = book.BookAuthors.Where(x => x.BookID == book.BookID).Select(x => x.Authors).ToList();
+//            var authorList = book.BookAuthors.Where(x => x.BookID == book.BookID).Select(x => x.Authors).ToList();
 
             Book bookVM = new Book()
             {
@@ -52,7 +52,7 @@ namespace WebLibraryCore.DataAccess.Repository
                 BookName = book.BookName,
                 YearOfPublish = book.YearOfPublish,
                 BookGenres = genre
-                //Authors = authorList
+                //AuthorsIDs = authorList
             };
             return bookVM;
         }

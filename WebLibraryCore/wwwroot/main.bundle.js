@@ -138,7 +138,7 @@ exports.AppModule = AppModule;
 /***/ "./src/app/book/book.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group\">\r\n  <label>Название Books</label>\r\n\r\n\r\n  <input type=\"text\" [(ngModel)]=\"book.BookID\" class=\"form-control col-4\" />\r\n  <p>here is {{ book}}</p>\r\n  <p>here is {{ book.BookID}}</p>\r\n\r\n  <ul *ngFor=\"let e of books$\">\r\n    <li>{{e.BookName}}</li>\r\n    <li>{{e.BookID}}</li>\r\n  </ul>\r\n</div>\r\n<!--<div class=\"form-group\">\r\n  <label>Дата випуска</label>\r\n  <input type=\"text\" [(ngModel)]=\"book.YearOfPublish\" class=\"form-control col-4\" />\r\n</div>-->\r\n\r\n"
+module.exports = "<div class=\"form-group\">\r\n  <label>Название Books</label>\r\n\r\n\r\n  <!--<input type=\"text\" [(ngModel)]=\"book.BookID\" class=\"form-control col-4\" />-->\r\n  <p>here is {{ book.BookID}}</p><br />\r\n  <!--<p>here is {{ book.BookID}}</p>-->\r\n\r\n  <ul *ngFor=\"let e of books\" >\r\n    <li>{{e.BookName}}</li>\r\n    <li>{{e.BookID}}</li>\r\n  </ul>\r\n</div>\r\n<!--<div class=\"form-group\">\r\n  <label>Дата випуска</label>\r\n  <input type=\"text\" [(ngModel)]=\"book.YearOfPublish\" class=\"form-control col-4\" />\r\n</div>-->\r\n\r\n"
 
 /***/ }),
 
@@ -158,17 +158,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var book_1 = __webpack_require__("./src/app/book/book.ts");
 var data_bookService_1 = __webpack_require__("./src/app/book/data.bookService.ts");
 var BookComponent = /** @class */ (function () {
     function BookComponent(dataService) {
         this.dataService = dataService;
-        this.book = new book_1.book();
+        this.book = new Array();
     }
     BookComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.dataService.getBooks().subscribe(function (book) { return _this.book = book; });
-        // console.log(this.dataService.getBooks().subscribe(book => this.book = book));
+        this.dataService.getBooks().subscribe(function (data) {
+            _this.book = data;
+        });
+        console.log(this.dataService.getBooks().subscribe(function (data) {
+            _this.book = data;
+        }));
     };
     BookComponent = __decorate([
         core_1.Component({
@@ -180,22 +183,6 @@ var BookComponent = /** @class */ (function () {
     return BookComponent;
 }());
 exports.BookComponent = BookComponent;
-
-
-/***/ }),
-
-/***/ "./src/app/book/book.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var book = /** @class */ (function () {
-    function book() {
-    }
-    return book;
-}());
-exports.book = book;
 
 
 /***/ }),
@@ -221,25 +208,11 @@ __webpack_require__("./node_modules/rxjs/_esm5/add/operator/map.js");
 var DataBookService = /** @class */ (function () {
     function DataBookService(http) {
         this.http = http;
-        this.url = "api/Book";
-        this.headers = new http_1.HttpHeaders({ 'Content-Type': 'application/json' });
-        this.options = { headers: this.headers };
+        this.url = 'http://localhost:51868/api/Book';
     }
     DataBookService.prototype.getBooks = function () {
-        return this.http.get(this.url, this.options) /*.map((response: Response) => response.json())*/; //.subscribe(
-        //res => {
-        //  console.log(res);
-        //},
-        //(err: HttpErrorResponse) => {
-        //  console.log(err.error);
-        //  console.log(err.name);
-        //  console.log(err.message);
-        //  console.log(err.status);
-        //});
-        //this.http.get(this.url).subscribe((data: Response) => {
-        //  this.getBooks = data.json();
-        //  this.getBooks = Array.of(this.getBooks);
-        //})
+        console.log(this.http.get(this.url));
+        return this.http.get(this.url);
     };
     DataBookService.prototype.getBook = function (id) {
         return this.http.get(this.url + '/' + id);

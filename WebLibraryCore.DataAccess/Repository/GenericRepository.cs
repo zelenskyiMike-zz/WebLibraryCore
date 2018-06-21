@@ -36,7 +36,10 @@ namespace WebLibraryCore.DataAccess.Repository
 
         public async Task<TEntity> GetByID(int id)
         {
-            return await context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync();
+            return await context.Set<TEntity>().FindAsync(id);//.FirstOrDefaultAsync();
+
+
+            //return await context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync();
         }
 
     }

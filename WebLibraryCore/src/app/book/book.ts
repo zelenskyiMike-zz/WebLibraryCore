@@ -1,7 +1,7 @@
-export class book {
+export class Book {
 
-  public BookID?: number;
-  public BookName?: string;
-  public GenreID?: number;
-  public YearOfPublish?: number;
+  public BookID: number;
+  public GenreID: number;
+  public BookName: string;
+  public YearOfPublish: number;
 }

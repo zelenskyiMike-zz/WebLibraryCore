@@ -2,11 +2,11 @@
   <label>Название Books</label>
 
 
-  <input type="text" [(ngModel)]="book.BookID" class="form-control col-4" />
-  <p>here is {{ book}}</p>
-  <p>here is {{ book.BookID}}</p>
+  <!--<input type="text" [(ngModel)]="book.BookID" class="form-control col-4" />-->
+  <p>here is {{ book.BookID}}</p><br />
+  <!--<p>here is {{ book.BookID}}</p>-->
 
-  <ul *ngFor="let e of books$">
+  <ul *ngFor="let e of books" >
     <li>{{e.BookName}}</li>
     <li>{{e.BookID}}</li>
   </ul>

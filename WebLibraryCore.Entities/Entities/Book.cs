@@ -16,9 +16,9 @@ namespace WebLibraryCore.Entities.Entities
         public string BookName { get; set; }
         public int YearOfPublish { get; set; }
 
-        [NotMapped]
+       // [NotMapped]
         public BookGenre BookGenres { get; set; }
-
+      //  [NotMapped]
         public IEnumerable<BookAuthor> BookAuthors { get; } = new List<BookAuthor>();
 
 

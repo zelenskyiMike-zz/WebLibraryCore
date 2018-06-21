@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataBookService } from './data.bookService';
-import { book } from './book';
+import { Book } from './book';
 
 @Component({
   //selector: 'app-books-list',
@@ -16,7 +16,7 @@ export class BookListComponent implements OnInit {
     this.load();
   }
   load() {
-    this.dataService.getBooks().subscribe((data: book) => this.books = data);
+    this.dataService.getBooks();
   }
   delete(id: number) {
     this.dataService.deleteBook(id).subscribe(data => this.load());

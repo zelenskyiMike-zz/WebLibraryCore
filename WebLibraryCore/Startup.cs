@@ -51,7 +51,7 @@ namespace WebLibraryCore
         await next();
         if (context.Response.StatusCode == 404 &&
            !Path.HasExtension(context.Request.Path.Value) &&
-           !context.Request.Path.Value.StartsWith("/api/"))
+           !context.Request.Path.Value.StartsWith("/api/Book"))
         {
           context.Request.Path = "/index.html";
           await next();

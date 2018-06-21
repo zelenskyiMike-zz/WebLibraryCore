@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DataBookService } from './data.bookService';
-import { book } from './book';
+import { Book } from './book';
 
 @Component({
   templateUrl: './book-edit.component.html'
@@ -9,7 +9,7 @@ import { book } from './book';
 
 export class BookEditComponent implements OnInit {
   id: number;
-  book: book;
+  book: Book;
   loaded: boolean = false;
 
   constructor(private bookService: DataBookService, private router: Router, activeRoute: ActivatedRoute) {
@@ -17,7 +17,7 @@ export class BookEditComponent implements OnInit {
   }
   ngOnInit(): void {
     if (this.id) {
-      this.bookService.getBook(this.id).subscribe((data: book) => {
+      this.bookService.getBook(this.id).subscribe((data: Book) => {
         this.book = data;
         if (this.book == null) {
           this.loaded = true
