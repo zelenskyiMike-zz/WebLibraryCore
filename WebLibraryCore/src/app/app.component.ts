@@ -5,21 +5,6 @@ import { Http, XHRBackend } from '@angular/http'
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  title = 'TITLE';
+export class AppComponent {
   constructor(private _httpService: Http) { }
-
-    apiValues: string[] = [];
-    ngOnInit() {
-        this._httpService.get('/api/Book').subscribe(values => {
-            this.apiValues = values.json() as string[];
-      });
-      //this._httpService.get('/api/Article').subscribe(values => {
-      //  this.apiValues = values.json() as string[];
-      //});
-      //this._httpService.get('/api/Magazine/1').subscribe(values => {
-      //  this.apiValues = values.json() as string[];
-      //});
   }
-
-}

@@ -8,17 +8,17 @@ import { Book } from './book';
 })
 export class BookListComponent implements OnInit {
 
-  books: any;
-  constructor(private dataService: DataBookService) { }
-  @Input() book: Array<any>;
+  public books: Book[] = [];
 
+  constructor(private dataService: DataBookService) { }
+  
   ngOnInit() {
     this.load();
   }
+
   load() {
-    this.dataService.getBooks();
-  }
-  delete(id: number) {
-    this.dataService.deleteBook(id).subscribe(data => this.load());
+    this.dataService.getBooks().subscribe(data => {
+      this.books = data;
+    });
   }
 }

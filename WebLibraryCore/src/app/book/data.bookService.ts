@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Book } from './book';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
 import { Http, Response } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class DataBookService {
@@ -10,9 +12,8 @@ export class DataBookService {
 
   constructor(private http: HttpClient) { }
 
-  getBooks<Book>() {
-    console.log(this.http.get(this.url));
-    return this.http.get(this.url);
+  getBooks(): Observable<Book[]> {
+    return this.http.get<Book[]>(this.url);
   }
   getBook<Book>(id: number) {
     return this.http.get(this.url + '/' + id);
@@ -21,7 +22,7 @@ export class DataBookService {
     return this.http.post(this.url, book);
   }
   updateBook(book: Book) {
-    return this.http.put(this.url + '/' + book.BookID, book);
+    return this.http.put(this.url + '/' + book.bookID, book);
   }
   deleteBook(id: number) {
     return this.http.delete(this.url + '/' + id);

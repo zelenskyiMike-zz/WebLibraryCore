@@ -6,24 +6,40 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 
-import { BookComponent } from './book/book.component';
-//import { MagazineComponent } from './magazine/magazine.component';
 import { AppComponent } from './app.component';
+
+//import { BookComponent } from './book/book.component';
+
+import { BookListComponent } from './book/book-list.component';
+import { BookCreateComponent } from './book/book-create.component';
+import { BookEditComponent } from './book/book-edit.component';
+import { BookDeleteComponent } from './book/book-delete.component';
+import { NotFoundComponent } from './book/not-found.component';
 import { DataBookService } from './book/data.bookService';
+
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
+
+//import { MagazineComponent } from './magazine/magazine.component';
 //import { DataMagazineService } from './magazine/data.magazineService';
 
 
-//const appRoutes: Routes = [
-//  { path: '', component: BookListComponent },
-//  { path: 'create', component: BookCreateComponent },
-//  { path: 'edit/:id', component: BookEditComponent },
-//  { path: '*', component: NotFoundComponent }
-//];
+const appRoutes: Routes = [
+  { path: '', component: BookListComponent },
+  { path: 'create', component: BookCreateComponent },
+  { path: 'edit/:id', component: BookEditComponent },
+  { path: 'delete/:id', component: BookDeleteComponent },
+  { path: '*', component: NotFoundComponent }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    BookComponent,
+    BookDeleteComponent,
+    BookListComponent,
+    BookCreateComponent,
+    BookEditComponent,
+    NotFoundComponent,
+    NavMenuComponent
     //MagazineComponent
   ],
   imports: [
@@ -31,9 +47,9 @@ import { DataBookService } from './book/data.bookService';
     FormsModule,
     HttpClientModule,
     HttpModule,
-    //RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [DataBookService/*, DataMagazineService*/],
-  bootstrap: [AppComponent, BookComponent/*, MagazineComponent*/]
+  providers: [AppComponent, DataBookService, BookDeleteComponent, BookListComponent, BookCreateComponent, BookEditComponent,  NavMenuComponent, NotFoundComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

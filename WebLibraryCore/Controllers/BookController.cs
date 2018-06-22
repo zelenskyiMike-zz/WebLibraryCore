@@ -31,6 +31,10 @@ namespace WebLibraryCore.WebUI.Controllers
     [HttpGet ("{id}")]
     public async Task<GetBookView> Get(int id)
     {
+      //if (id == 0)
+      //{
+      //  throw new NotImplementedException();
+      //}
       return await bookService.GetBookDetails(id);
     }
 

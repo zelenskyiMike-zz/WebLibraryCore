@@ -12,19 +12,30 @@ export class BookEditComponent implements OnInit {
   book: Book;
   loaded: boolean = false;
 
+
   constructor(private bookService: DataBookService, private router: Router, activeRoute: ActivatedRoute) {
     this.id = Number.parseInt(activeRoute.snapshot.params["id"]);
   }
   ngOnInit(): void {
-    if (this.id) {
+    this.getBook(this.id);
+   // if (this.loaded) {
+      this.bookService.updateBook(this.book);
+    //}
+    //else {
+      
+    //}
+  }
+
+  getBook(id: number) {
       this.bookService.getBook(this.id).subscribe((data: Book) => {
         this.book = data;
-        if (this.book == null) {
+        ////for what???////
+        if (this.book != null) {
           this.loaded = true
         }
       });
-    }
   }
+
   save() {
     this.bookService.updateBook(this.book).subscribe(data => this.router.navigateByUrl("/"));
   }

@@ -1,7 +1,7 @@
 export class Book {
-
-  public BookID: number;
-  public GenreID: number;
-  public BookName: string;
-  public YearOfPublish: number;
+  constructor(
+    public bookID: number,
+    public genreID: number,
+    public bookName: string,
+    public yearOfPublish: number) { }
 }
