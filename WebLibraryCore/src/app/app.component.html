@@ -1,10 +1,20 @@
-<div class='container-fluid'>
-    <div class='row'>
-        <div class='col'>
-            <!--<nav-menu></nav-menu>-->
-        </div>
-        <div class='col body-content'>
-            <router-outlet></router-outlet>
-        </div>
-    </div>
+
+<div class="container">
+  <nav-menu></nav-menu>
+</div>
+
+<div class="container content-main">
+
+  <button kendoButton  [routerLink]="['/']" [primary]="true">My Kendo UI Button</button>
+
+  <!--SIMPLE ANALOG OF TOOLBAR-->
+
+  <!--<button kendoButton  [routerLink]="['/edit/:{id}']" [primary]="true">My Kendo UI Button</button>
+
+  <button kendoButton (click)="onButtonClick()" [primary]="true">My Kendo UI Button</button>-->
+
+  <br />
+
+  <router-outlet></router-outlet>
+
 </div>

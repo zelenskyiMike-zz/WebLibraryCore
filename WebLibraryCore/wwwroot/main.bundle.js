@@ -20,14 +20,14 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/app.component.css":
 /***/ (function(module, exports) {
 
-module.exports = "body{\r\n  background-color: antiquewhite;\r\n}\r\n"
+module.exports = "body{\r\n  background-color: antiquewhite;\r\n}\r\n.content-main{\r\n  margin-left : 21%;\r\n}\r\n"
 
 /***/ }),
 
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class='container-fluid'>\r\n    <div class='row'>\r\n        <div class='col'>\r\n            <!--<nav-menu></nav-menu>-->\r\n        </div>\r\n        <div class='col body-content'>\r\n            <router-outlet></router-outlet>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "\r\n<div class=\"container\">\r\n  <nav-menu></nav-menu>\r\n</div>\r\n\r\n<div class=\"container content-main\">\r\n\r\n  <button kendoButton  [routerLink]=\"['/']\" [primary]=\"true\">My Kendo UI Button</button>\r\n\r\n  <!--SIMPLE ANALOG OF TOOLBAR-->\r\n\r\n  <!--<button kendoButton  [routerLink]=\"['/edit/:{id}']\" [primary]=\"true\">My Kendo UI Button</button>\r\n\r\n  <button kendoButton (click)=\"onButtonClick()\" [primary]=\"true\">My Kendo UI Button</button>-->\r\n\r\n  <br />\r\n\r\n  <router-outlet></router-outlet>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -81,19 +81,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var platform_browser_1 = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var forms_1 = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
 var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var http_2 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
-var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var app_component_1 = __webpack_require__("./src/app/app.component.ts");
-//import { BookComponent } from './book/book.component';
+var nav_menu_component_1 = __webpack_require__("./src/app/nav-menu/nav-menu.component.ts");
+//BOOK
 var book_list_component_1 = __webpack_require__("./src/app/book/book-list.component.ts");
 var book_create_component_1 = __webpack_require__("./src/app/book/book-create.component.ts");
 var book_edit_component_1 = __webpack_require__("./src/app/book/book-edit.component.ts");
 var book_delete_component_1 = __webpack_require__("./src/app/book/book-delete.component.ts");
 var not_found_component_1 = __webpack_require__("./src/app/book/not-found.component.ts");
 var data_bookService_1 = __webpack_require__("./src/app/book/data.bookService.ts");
-var nav_menu_component_1 = __webpack_require__("./src/app/nav-menu/nav-menu.component.ts");
+//KENDO UI
+var kendo_angular_buttons_1 = __webpack_require__("./node_modules/@progress/kendo-angular-buttons/dist/es/index.js");
+var kendo_angular_grid_1 = __webpack_require__("./node_modules/@progress/kendo-angular-grid/dist/es/index.js");
+//ANGULAR ANIMATIONS
+var animations_1 = __webpack_require__("./node_modules/@angular/platform-browser/esm5/animations.js");
 //import { MagazineComponent } from './magazine/magazine.component';
 //import { DataMagazineService } from './magazine/data.magazineService';
 var appRoutes = [
@@ -116,13 +121,15 @@ var AppModule = /** @class */ (function () {
                 book_edit_component_1.BookEditComponent,
                 not_found_component_1.NotFoundComponent,
                 nav_menu_component_1.NavMenuComponent
-                //MagazineComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpClientModule,
                 http_2.HttpModule,
+                animations_1.BrowserAnimationsModule,
+                kendo_angular_buttons_1.ButtonsModule,
+                kendo_angular_grid_1.GridModule,
                 router_1.RouterModule.forRoot(appRoutes)
             ],
             providers: [app_component_1.AppComponent, data_bookService_1.DataBookService, book_delete_component_1.BookDeleteComponent, book_list_component_1.BookListComponent, book_create_component_1.BookCreateComponent, book_edit_component_1.BookEditComponent, nav_menu_component_1.NavMenuComponent, not_found_component_1.NotFoundComponent],
@@ -228,7 +235,7 @@ exports.BookDeleteComponent = BookDeleteComponent;
 /***/ "./src/app/book/book-edit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"loaded\">\r\n  <h2>Изменение данных о книге</h2>\r\n  <div class=\"form-group\">\r\n    <input type=\"text\" value=\"{{}}\"/>\r\n    <input type=\"button\" value=\"Сохранить\" (click)=\"save()\" class=\"btn btn-success\" />\r\n  </div>\r\n</div>\r\n<a routerLink=\"/\" class=\"nav-link\">Назад к списку</a>\r\n<!--<div *ngIf=\"!loaded\" [routerLink]=\"['*']></div>-->\r\n"
+module.exports = "<div *ngIf=\"loaded\">\r\n  <h2>Изменение данных о книге</h2>\r\n  <div class=\"form-group\">\r\n\r\n    <input type=\"button\" value=\"Сохранить\" (click)=\"save()\" class=\"btn btn-success\" />\r\n  </div>\r\n</div>\r\n<a routerLink=\"/\" class=\"nav-link\">Назад к списку</a>\r\n\r\n"
 
 /***/ }),
 
@@ -295,7 +302,7 @@ exports.BookEditComponent = BookEditComponent;
 /***/ "./src/app/book/book-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group\">\r\n  <label>List of books</label>\r\n  <ul>\r\n    <li *ngFor=\"let book of books\">\r\n      <p>{{book?.bookName}}</p>\r\n      <p>{{book?.yearOfPublish}}</p>\r\n    </li>\r\n  </ul>\r\n</div>\r\n"
+module.exports = "\r\n<br />\r\n<div class=\"form-group\">\r\n  <label>List of books</label>\r\n</div>\r\n\r\n<kendo-grid [data]=\"books\" [height]=\"410\">\r\n  <kendo-grid-column field=\"bookID\" title=\"ID\" width=\"40\">\r\n  </kendo-grid-column>\r\n  <kendo-grid-column field=\"bookName\" title=\"Name\" width=\"80\">\r\n  </kendo-grid-column>\r\n  <kendo-grid-column field=\"yearOfPublish\" title=\"Category\">\r\n  </kendo-grid-column>\r\n  <kendo-grid-column kendoButton [routerLink]=\"['/']\" [primary]=\"true\">\r\n    title=\"Category\">\r\n    My Kendo UI Button\r\n  </kendo-grid-column>\r\n\r\n</kendo-grid>\r\n"
 
 /***/ }),
 
@@ -424,14 +431,14 @@ exports.NotFoundComponent = NotFoundComponent;
 /***/ "./src/app/nav-menu/nav-menu.component.css":
 /***/ (function(module, exports) {
 
-module.exports = "li .glyphicon {\r\n  margin-right: 10px;\r\n}\r\n\r\n/* Highlighting rules for nav menu items */\r\n\r\nli.link-active a,\r\nli.link-active a:hover,\r\nli.link-active a:focus {\r\n  background-color: #4189C7;\r\n  color: white;\r\n}\r\n\r\n/* Keep the nav menu independent of scrolling and on top of other items */\r\n\r\n.main-nav {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  z-index: 1;\r\n}\r\n\r\n@media (min-width: 768px) {\r\n  /* On small screens, convert the nav menu to a vertical sidebar */\r\n  .main-nav {\r\n    height: 100%;\r\n    width: calc(25% - 20px);\r\n  }\r\n\r\n  .navbar {\r\n    border-radius: 0px;\r\n    border-width: 0px;\r\n    height: 100%;\r\n  }\r\n\r\n  .navbar-header {\r\n    float: none;\r\n  }\r\n\r\n  .navbar-collapse {\r\n    border-top: 1px solid #444;\r\n    padding: 0px;\r\n  }\r\n\r\n  .navbar ul {\r\n    float: none;\r\n  }\r\n\r\n  .navbar li {\r\n    float: none;\r\n    font-size: 15px;\r\n    margin: 6px;\r\n  }\r\n\r\n    .navbar li a {\r\n      padding: 10px 16px;\r\n      border-radius: 4px;\r\n    }\r\n\r\n  .navbar a {\r\n    /* If a menu item's text is too long, truncate it */\r\n    width: 100%;\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n  }\r\n}\r\n"
+module.exports = "body {\r\n  font-family: \"Lato\", sans-serif;\r\n}\r\n\r\n.sidenav {\r\n  height: 100%;\r\n  width: 20%;\r\n  position: fixed;\r\n  z-index: 1;\r\n  top: 0;\r\n  left: 0;\r\n  background-color: #111;\r\n  overflow-x: hidden;\r\n  padding-top: 20px;\r\n}\r\n\r\n.sidenav a {\r\n    padding: 6px 6px 6px 32px;\r\n    text-decoration: none;\r\n    font-size: 25px;\r\n    color: #818181;\r\n    display: block;\r\n  }\r\n\r\n.sidenav a:hover {\r\n      color: #f1f1f1;\r\n    }\r\n\r\n@media screen and (max-height: 450px) {\r\n  .sidenav {\r\n    padding-top: 15px;\r\n  }\r\n\r\n    .sidenav a {\r\n      font-size: 18px;\r\n    }\r\n}\r\n"
 
 /***/ }),
 
 /***/ "./src/app/nav-menu/nav-menu.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class='main-nav'>\r\n  <div class='navbar navbar-inverse'>\r\n    <div class='navbar-header'>\r\n      <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n        <span class='sr-only'>Toggle navigation</span>\r\n        <span class='icon-bar'></span>\r\n        <span class='icon-bar'></span>\r\n        <span class='icon-bar'></span>\r\n      </button>\r\n      <a class='navbar-brand' [routerLink]=\"['/']\">WebApplication1</a>\r\n    </div>\r\n    <div class='clearfix'></div>\r\n    <div class='navbar-collapse collapse'>\r\n      <ul class='nav navbar-nav'>\r\n        <li [routerLinkActive]=\"['link-active']\">\r\n          <a [routerLink]=\"['/']\">\r\n            <span class='glyphicon glyphicon-home'></span> Home\r\n          </a>\r\n        </li>\r\n        <li [routerLinkActive]=\"['link-active']\">\r\n          <a [routerLink]=\"['/edit/:id']\">\r\n            <span class='glyphicon glyphicon-education'></span> Edit\r\n          </a>\r\n        </li>\r\n        <li [routerLinkActive]=\"['link-active']\">\r\n          <a [routerLink]=\"['/create']\">\r\n            <span class='glyphicon glyphicon-th-list'></span> Create\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<!--<div class='main-nav'>\r\n  <div class='navbar navbar-inverse'>\r\n    <div class='navbar-header'>\r\n      <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n        <span class='sr-only'>Toggle navigation</span>\r\n        <span class='icon-bar'></span>\r\n        <span class='icon-bar'></span>\r\n        <span class='icon-bar'></span>\r\n      </button>\r\n      <a class='navbar-brand' [routerLink]=\"['/']\">WebApplication1</a>\r\n    </div>\r\n    <div class='clearfix'></div>\r\n    <div class='navbar-collapse collapse'>\r\n      <ul class='nav navbar-nav'>\r\n        <li [routerLinkActive]=\"['link-active']\">\r\n          <a [routerLink]=\"['/']\">\r\n            <span class='glyphicon glyphicon-home'></span> Home\r\n          </a>\r\n        </li>\r\n        <li [routerLinkActive]=\"['link-active']\">\r\n          <a [routerLink]=\"['/edit/:id']\">\r\n            <span class='glyphicon glyphicon-education'></span> Edit\r\n          </a>\r\n        </li>\r\n        <li [routerLinkActive]=\"['link-active']\">\r\n          <a [routerLink]=\"['/create']\">\r\n            <span class='glyphicon glyphicon-th-list'></span> Create\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>-->\r\n<div class=\"sidenav\">\r\n  <h1><a [routerLink]=\"['/']\">WebLibrary</a></h1>\r\n  <a href=\"#\">Authors list</a>\r\n  <a href=\"#\">Library contacts</a>\r\n</div>\r\n"
 
 /***/ }),
 

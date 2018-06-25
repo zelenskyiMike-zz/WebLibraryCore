@@ -7,4 +7,9 @@ import { Http, XHRBackend } from '@angular/http'
 })
 export class AppComponent {
   constructor(private _httpService: Http) { }
+
+  //title = 'Hello World!';
+  //onButtonClick() {
+  //  this.title = 'Hello from Kendo UI!';
+  //}
   }
