@@ -9,11 +9,11 @@
   </kendo-grid-column>
   <kendo-grid-column field="bookName" title="Name" width="80">
   </kendo-grid-column>
-  <kendo-grid-column field="yearOfPublish" title="Category">
+  <kendo-grid-column field="yearOfPublish" title="Year">
   </kendo-grid-column>
-  <kendo-grid-column kendoButton [routerLink]="['/']" [primary]="true">
-    title="Category">
-    My Kendo UI Button
+  <kendo-grid-column title="Action">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <button kendoButton [routerLink]="['/edit/:{1}']">My Kendo UI Button</button>
+    </ng-template>
   </kendo-grid-column>
-
 </kendo-grid>

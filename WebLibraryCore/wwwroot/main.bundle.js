@@ -302,7 +302,7 @@ exports.BookEditComponent = BookEditComponent;
 /***/ "./src/app/book/book-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<br />\r\n<div class=\"form-group\">\r\n  <label>List of books</label>\r\n</div>\r\n\r\n<kendo-grid [data]=\"books\" [height]=\"410\">\r\n  <kendo-grid-column field=\"bookID\" title=\"ID\" width=\"40\">\r\n  </kendo-grid-column>\r\n  <kendo-grid-column field=\"bookName\" title=\"Name\" width=\"80\">\r\n  </kendo-grid-column>\r\n  <kendo-grid-column field=\"yearOfPublish\" title=\"Category\">\r\n  </kendo-grid-column>\r\n  <kendo-grid-column kendoButton [routerLink]=\"['/']\" [primary]=\"true\">\r\n    title=\"Category\">\r\n    My Kendo UI Button\r\n  </kendo-grid-column>\r\n\r\n</kendo-grid>\r\n"
+module.exports = "\r\n<br />\r\n<div class=\"form-group\">\r\n  <label>List of books</label>\r\n</div>\r\n\r\n<kendo-grid [data]=\"books\" [height]=\"410\">\r\n  <kendo-grid-column field=\"bookID\" title=\"ID\" width=\"40\">\r\n  </kendo-grid-column>\r\n  <kendo-grid-column field=\"bookName\" title=\"Name\" width=\"80\">\r\n  </kendo-grid-column>\r\n  <kendo-grid-column field=\"yearOfPublish\" title=\"Year\">\r\n  </kendo-grid-column>\r\n  <kendo-grid-column title=\"Action\">\r\n    <ng-template kendoGridCellTemplate let-dataItem>\r\n      <button kendoButton [routerLink]=\"['/edit/:{1}']\">My Kendo UI Button</button>\r\n    </ng-template>\r\n  </kendo-grid-column>\r\n</kendo-grid>\r\n"
 
 /***/ }),
 
@@ -323,10 +323,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var data_bookService_1 = __webpack_require__("./src/app/book/data.bookService.ts");
+var book_1 = __webpack_require__("./src/app/book/book.ts");
 var BookListComponent = /** @class */ (function () {
     function BookListComponent(dataService) {
         this.dataService = dataService;
         this.books = [];
+        this.selectedBook = null;
+        this.isNewRecord = false;
     }
     BookListComponent.prototype.ngOnInit = function () {
         this.load();
@@ -337,6 +340,30 @@ var BookListComponent = /** @class */ (function () {
             _this.books = data;
         });
     };
+    BookListComponent.prototype.addBook = function () {
+        this.selectedBook = new book_1.Book(0, 0, null, 0);
+        this.books.push(this.selectedBook);
+        this.isNewRecord = true;
+    };
+    BookListComponent.prototype.editBook = function (book) {
+        this.selectedBook = book;
+    };
+    BookListComponent.prototype.loadTemplate = function (book) {
+        if (this.selectedBook && this.selectedBook.bookID == book.bookID) {
+            return this.editTemplate;
+        }
+        if (!this.selectedBook && this.selectedBook.bookID != book.bookID) {
+            return this.readOnlyTemplate;
+        }
+    };
+    __decorate([
+        core_1.ViewChild('readOnlyTemplate'),
+        __metadata("design:type", core_1.TemplateRef)
+    ], BookListComponent.prototype, "readOnlyTemplate", void 0);
+    __decorate([
+        core_1.ViewChild('editTemplate'),
+        __metadata("design:type", core_1.TemplateRef)
+    ], BookListComponent.prototype, "editTemplate", void 0);
     BookListComponent = __decorate([
         core_1.Component({
             selector: 'app-books-list',
@@ -347,6 +374,26 @@ var BookListComponent = /** @class */ (function () {
     return BookListComponent;
 }());
 exports.BookListComponent = BookListComponent;
+
+
+/***/ }),
+
+/***/ "./src/app/book/book.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var Book = /** @class */ (function () {
+    function Book(bookID, genreID, bookName, yearOfPublish) {
+        this.bookID = bookID;
+        this.genreID = genreID;
+        this.bookName = bookName;
+        this.yearOfPublish = yearOfPublish;
+    }
+    return Book;
+}());
+exports.Book = Book;
 
 
 /***/ }),
