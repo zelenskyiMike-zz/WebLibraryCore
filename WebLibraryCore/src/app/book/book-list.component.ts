@@ -10,13 +10,13 @@ import { Book } from './book';
 export class BookListComponent implements OnInit {
 
   public books: Book[] = [];
-  public book: Book;
-  public selectedBook: Book = null;
-  public isNewRecord: boolean = false;
-  public statusMessage: string;
+  //public book: Book;
 
-  @ViewChild('readOnlyTemplate') readOnlyTemplate: TemplateRef<any>;
-  @ViewChild('editTemplate') editTemplate: TemplateRef<any>;
+  private editedRowIndex: number;
+  private book: Book;
+
+  //@ViewChild('readOnlyTemplate') readOnlyTemplate: TemplateRef<any>;
+  //@ViewChild('editTemplate') editTemplate: TemplateRef<any>;
 
 
   constructor(private dataService: DataBookService) { }
@@ -31,26 +31,31 @@ export class BookListComponent implements OnInit {
     });
   }
 
-  addBook() {
-    this.selectedBook = new Book(0, 0, null, 0);
-    this.books.push(this.selectedBook);
-    this.isNewRecord = true;
+  addHandler({ sender }/*, formInstance*/) {
+    //formInstance.reset();
+    this.closeEditor(sender);
+    sender.addRow(new Book())
   }
 
-  editBook(book: Book) {
-    this.selectedBook = book;
+  removeHandler({ dataItem }) {
+    console.log("remove presed " + dataItem.bookID +1);
+
+    this.dataService.deleteBook(dataItem.bookID);
   }
 
-  loadTemplate(book: Book) {
-    if (this.selectedBook && this.selectedBook.bookID == book.bookID) {
-      return this.editTemplate;
-    }
-    if (!this.selectedBook && this.selectedBook.bookID != book.bookID) {
-      return this.readOnlyTemplate;
-    }
+  private closeEditor(grid, rowIndex = this.editedRowIndex) {
+    grid.closeRow(rowIndex);
+    this.dataService.resetItem(this.book);
+    this.editedRowIndex = undefined;
+    this.book = undefined;
   }
 
-  //saveBook() {
+  //public saveHandler({ sender, rowIndex, dataItem, isNew }) {
+  //  this.dataService.save(dataItem, isNew);
 
+  //  sender.closeRow(rowIndex);
+
+  //  this.editedRowIndex = undefined;
+  //  this.book = undefined;
   //}
 }

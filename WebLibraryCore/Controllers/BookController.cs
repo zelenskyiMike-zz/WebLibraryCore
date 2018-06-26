@@ -58,9 +58,10 @@ namespace WebLibraryCore.WebUI.Controllers
 
     // DELETE: api/ApiWithActions/5
     [HttpDelete]
-    public IActionResult Delete(int id)
+    public IActionResult Delete([FromBody]string id)
     {
-      bookService.Delete(id);
+      Int32.TryParse(id, out int request);
+      bookService.Delete(request);
       return Ok(id);
     }
   }

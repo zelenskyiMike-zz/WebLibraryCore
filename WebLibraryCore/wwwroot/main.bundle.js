@@ -302,7 +302,7 @@ exports.BookEditComponent = BookEditComponent;
 /***/ "./src/app/book/book-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<br />\r\n<div class=\"form-group\">\r\n  <label>List of books</label>\r\n</div>\r\n\r\n<kendo-grid [data]=\"books\" [height]=\"410\">\r\n  <kendo-grid-column field=\"bookID\" title=\"ID\" width=\"40\">\r\n  </kendo-grid-column>\r\n  <kendo-grid-column field=\"bookName\" title=\"Name\" width=\"80\">\r\n  </kendo-grid-column>\r\n  <kendo-grid-column field=\"yearOfPublish\" title=\"Year\">\r\n  </kendo-grid-column>\r\n  <kendo-grid-column title=\"Action\">\r\n    <ng-template kendoGridCellTemplate let-dataItem>\r\n      <button kendoButton [routerLink]=\"['/edit/:{1}']\">My Kendo UI Button</button>\r\n    </ng-template>\r\n  </kendo-grid-column>\r\n</kendo-grid>\r\n"
+module.exports = "\r\n<br />\r\n<div class=\"form-group\">\r\n  <label>List of books</label>\r\n</div>\r\n<!--<ng-template #readOnlyTemplate let-books>-->\r\n<kendo-grid [data]=\"books\"\r\n            [height]=\"420\"\r\n            (dataStateChange)=\"onStateChange($event)\"\r\n            (edit)=\"editHandler($event)\" (cancel)=\"cancelHandler($event)\"\r\n            (save)=\"saveHandler($event)\" (remove)=\"removeHandler($event)\"\r\n            (add)=\"addHandler($event)\"\r\n            [navigable]=\"true\">\r\n  <ng-template kendoGridToolbarTemplate>\r\n    <button kendoGridAddCommand type=\"button\">Add new</button>\r\n  </ng-template>\r\n  <kendo-grid-column field=\"bookID\" title=\"ID\" width=\"50\">\r\n    <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n      <input [(ngModel)]=\"books.bookID\" kendoGridFocusable name=\"bookID\" class=\"k-textbox\" type=\"number\" required />\r\n    </ng-template>\r\n  </kendo-grid-column>\r\n  <kendo-grid-column field=\"bookName\" title=\"Name\" width=\"120\">\r\n    <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n      <input [(ngModel)]=\"books.bookName\" kendoGridFocusable name=\"bookName\" class=\"k-textbox\" required />\r\n    </ng-template>\r\n  </kendo-grid-column>\r\n  <kendo-grid-column field=\"yearOfPublish\" title=\"Year\">\r\n    <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n      <input [(ngModel)]=\"books.yearOfPublish\" kendoGridFocusable name=\"yearOfPublish\" class=\"k-textbox\" type=\"number\" min=\"876\" max=\"2018\" required />\r\n    </ng-template>\r\n  </kendo-grid-column>\r\n  <kendo-grid-command-column title=\"Action\" width=\"220\">\r\n    <ng-template kendoGridCellTemplate let-isNew=\"isNew\">\r\n      <!--<button kendoGridEditCommand type=\"button\" [primary]=\"true\">Edit</button>-->\r\n      <button kendoGridRemoveCommand type=\"button\">Remove</button>\r\n      <button kendoGridSaveCommand type=\"button\">\r\n        {{ isNew ? 'Save' : 'Update' }}\r\n      </button>\r\n      <button kendoGridCancelCommand type=\"button\">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>\r\n    </ng-template>\r\n  </kendo-grid-command-column>\r\n\r\n</kendo-grid>\r\n\r\n<br />\r\n\r\n<!--<form novalidate #myForm=\"ngForm\">\r\n  <kendo-grid [data]=\"view | async\"\r\n              [height]=\"533\"\r\n              [pageSize]=\"gridState.take\" [skip]=\"gridState.skip\" [sort]=\"gridState.sort\"\r\n              [pageable]=\"true\" [sortable]=\"true\"\r\n              (dataStateChange)=\"onStateChange($event)\"\r\n              (edit)=\"editHandler($event)\" (cancel)=\"cancelHandler($event)\"\r\n              (save)=\"saveHandler($event)\" (remove)=\"removeHandler($event)\"\r\n              (add)=\"addHandler($event, myForm)\"\r\n              [navigable]=\"true\">\r\n    <ng-template kendoGridToolbarTemplate>\r\n      <button kendoGridAddCommand type=\"button\">Add new</button>\r\n    </ng-template>\r\n    <kendo-grid-column field=\"bookName\" title=\"Book Name\">\r\n      <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n        <input [(ngModel)]=\"books.bookName\" kendoGridFocusable name=\"bookName\" class=\"k-textbox\" required />\r\n      </ng-template>\r\n    </kendo-grid-column>\r\n    <kendo-grid-column field=\"genreID\" editor=\"numeric\" title=\"Genre\">\r\n      <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n        <input [(ngModel)]=\"books.genreID\" kendoGridFocusable name=\"genreID\" class=\"k-textbox\" type=\"number\" />\r\n      </ng-template>\r\n    </kendo-grid-column>\r\n    <kendo-grid-column field=\"yearOfPublish\" editor=\"numeric\" title=\"Year Of Publish\">\r\n      <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n        <input [(ngModel)]=\"books.yearOfPublish\"\r\n               kendoGridFocusable\r\n               name=\"yearOfPublish\"\r\n               required\r\n               min=\"876\"\r\n               max=\"2018\"\r\n               class=\"k-textbox\"\r\n               type=\"number\" />\r\n      </ng-template>\r\n    </kendo-grid-column>\r\n    <kendo-grid-command-column title=\"command\" width=\"220\">\r\n      <ng-template kendoGridCellTemplate let-isNew=\"isNew\">\r\n        <button kendoGridEditCommand type=\"button\" [primary]=\"true\">Edit</button>\r\n        <button kendoGridRemoveCommand type=\"button\">Remove</button>\r\n        <button kendoGridSaveCommand type=\"button\"\r\n                [disabled]=\"myForm.invalid || myForm.pristine\">\r\n          {{ isNew ? 'Add' : 'Update' }}\r\n        </button>\r\n        <button kendoGridCancelCommand type=\"button\">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>\r\n      </ng-template>\r\n    </kendo-grid-command-column>\r\n  </kendo-grid>\r\n</form>-->\r\n"
 
 /***/ }),
 
@@ -325,11 +325,11 @@ var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var data_bookService_1 = __webpack_require__("./src/app/book/data.bookService.ts");
 var book_1 = __webpack_require__("./src/app/book/book.ts");
 var BookListComponent = /** @class */ (function () {
+    //@ViewChild('readOnlyTemplate') readOnlyTemplate: TemplateRef<any>;
+    //@ViewChild('editTemplate') editTemplate: TemplateRef<any>;
     function BookListComponent(dataService) {
         this.dataService = dataService;
         this.books = [];
-        this.selectedBook = null;
-        this.isNewRecord = false;
     }
     BookListComponent.prototype.ngOnInit = function () {
         this.load();
@@ -340,30 +340,24 @@ var BookListComponent = /** @class */ (function () {
             _this.books = data;
         });
     };
-    BookListComponent.prototype.addBook = function () {
-        this.selectedBook = new book_1.Book(0, 0, null, 0);
-        this.books.push(this.selectedBook);
-        this.isNewRecord = true;
+    BookListComponent.prototype.addHandler = function (_a /*, formInstance*/) {
+        var sender = _a.sender;
+        //formInstance.reset();
+        this.closeEditor(sender);
+        sender.addRow(new book_1.Book());
     };
-    BookListComponent.prototype.editBook = function (book) {
-        this.selectedBook = book;
+    BookListComponent.prototype.removeHandler = function (_a) {
+        var dataItem = _a.dataItem;
+        console.log("remove presed " + dataItem.bookID + 1);
+        this.dataService.deleteBook(dataItem.bookID);
     };
-    BookListComponent.prototype.loadTemplate = function (book) {
-        if (this.selectedBook && this.selectedBook.bookID == book.bookID) {
-            return this.editTemplate;
-        }
-        if (!this.selectedBook && this.selectedBook.bookID != book.bookID) {
-            return this.readOnlyTemplate;
-        }
+    BookListComponent.prototype.closeEditor = function (grid, rowIndex) {
+        if (rowIndex === void 0) { rowIndex = this.editedRowIndex; }
+        grid.closeRow(rowIndex);
+        this.dataService.resetItem(this.book);
+        this.editedRowIndex = undefined;
+        this.book = undefined;
     };
-    __decorate([
-        core_1.ViewChild('readOnlyTemplate'),
-        __metadata("design:type", core_1.TemplateRef)
-    ], BookListComponent.prototype, "readOnlyTemplate", void 0);
-    __decorate([
-        core_1.ViewChild('editTemplate'),
-        __metadata("design:type", core_1.TemplateRef)
-    ], BookListComponent.prototype, "editTemplate", void 0);
     BookListComponent = __decorate([
         core_1.Component({
             selector: 'app-books-list',
@@ -385,11 +379,7 @@ exports.BookListComponent = BookListComponent;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var Book = /** @class */ (function () {
-    function Book(bookID, genreID, bookName, yearOfPublish) {
-        this.bookID = bookID;
-        this.genreID = genreID;
-        this.bookName = bookName;
-        this.yearOfPublish = yearOfPublish;
+    function Book() {
     }
     return Book;
 }());
@@ -403,6 +393,16 @@ exports.Book = Book;
 
 "use strict";
 
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -415,11 +415,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var rxjs_1 = __webpack_require__("./node_modules/rxjs/Rx.js");
 __webpack_require__("./node_modules/rxjs/_esm5/add/operator/map.js");
-var DataBookService = /** @class */ (function () {
+var DataBookService = /** @class */ (function (_super) {
+    __extends(DataBookService, _super);
     function DataBookService(http) {
-        this.http = http;
-        this.url = 'http://localhost:51868/api/Book';
+        var _this = _super.call(this, []) || this;
+        _this.http = http;
+        _this.url = 'http://localhost:51868/api/Book';
+        _this.data = [];
+        return _this;
     }
     DataBookService.prototype.getBooks = function () {
         return this.http.get(this.url);
@@ -434,14 +439,32 @@ var DataBookService = /** @class */ (function () {
         return this.http.put(this.url + '/' + book.bookID, book);
     };
     DataBookService.prototype.deleteBook = function (id) {
+        //this.resetItem(this.getBook(id));
+        console.log(id + 1 + " from service");
+        console.log(this.url + '/' + id + " from service");
         return this.http.delete(this.url + '/' + id);
+    };
+    DataBookService.prototype.reset = function () {
+        this.data = [11, 'b', 1111];
+    };
+    DataBookService.prototype.resetItem = function (data) {
+        if (!data) {
+            return;
+        }
+        if (function (item) { return item.bookID === data.bookID; }) {
+            // find orignal data item
+            var originalDataItem = this.getBook(data.bookID);
+            Object.assign(originalDataItem, data);
+        }
+        // revert changes
+        _super.prototype.next.call(this, this.data);
     };
     DataBookService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.HttpClient])
     ], DataBookService);
     return DataBookService;
-}());
+}(rxjs_1.BehaviorSubject));
 exports.DataBookService = DataBookService;
 
 

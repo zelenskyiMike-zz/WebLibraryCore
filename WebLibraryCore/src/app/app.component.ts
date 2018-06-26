@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, XHRBackend } from '@angular/http'
+import { Http, XHRBackend } from '@angular/http';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
