@@ -50,6 +50,7 @@ namespace WebLibraryCore.DataAccess.Repository
             {
                 BookID = book.BookID,
                 BookName = book.BookName,
+                GenreID = book.GenreID,
                 YearOfPublish = book.YearOfPublish,
                 BookGenres = genre
                 //AuthorsIDs = authorList

@@ -15,32 +15,30 @@ namespace WebLibraryCore.BusinessLogic.Services
     {
         private readonly BookRepository bookRepository;
         private readonly EFDbContext context;
-        private readonly IMapper mapper;
 
-        public BookService(EFDbContext context, IMapper mapper)
+        public BookService(EFDbContext context)
         {
             this.context = context;
-            this.mapper = mapper;
             bookRepository = new BookRepository(context);
         }
 
 
         public async void Create(GetBookView bookView)
         {
-            var book = mapper.Map<GetBookView, Book>(bookView);
+            var book = Mapper.Map<GetBookView, Book>(bookView);
             await bookRepository.Create(book);
         }
 
         public Task<GetBookView> GetBookByID(int id)
         {
             var book = bookRepository.GetByID(id);
-            var bookMaped = mapper.Map<Task<Book>, Task<GetBookView>>(book);
+            var bookMaped = Mapper.Map<Task<Book>, Task<GetBookView>>(book);
             return bookMaped;
         }
 
         public async void Update(GetBookView bookView)
         {
-            var book = mapper.Map<GetBookView, Book>(bookView);
+            var book = Mapper.Map<GetBookView, Book>(bookView);
             await bookRepository.Update(book);
         }
 
@@ -53,22 +51,22 @@ namespace WebLibraryCore.BusinessLogic.Services
         public IEnumerable<GetBookView> GetAllBooksWithGenres()
         {
             var books = bookRepository.GetAllBooksWithGenres();
-            var booksMapped = mapper.Map<IEnumerable<Book>, IEnumerable<GetBookView>>(books);
+            var booksMapped = Mapper.Map<IEnumerable<Book>, IEnumerable<GetBookView>>(books);
             return booksMapped;
         }
 
         public IEnumerable<GetAuthorView> GetAuthorsNotExistInBook(GetBookView book)
         {
-            var bookMapped = mapper.Map<GetBookView, Book>(book);
+            var bookMapped = Mapper.Map<GetBookView, Book>(book);
             var authors = bookRepository.GetAuthorsNotExistInBook(bookMapped);
-            var authorsMapped = mapper.Map<IEnumerable<Author>, IEnumerable<GetAuthorView>>(authors);
+            var authorsMapped = Mapper.Map<IEnumerable<Author>, IEnumerable<GetAuthorView>>(authors);
             return authorsMapped;
         }
 
         public Task<GetBookView> GetBookDetails(int id)
         {
             var bookDetails = bookRepository.GetBookDetails(id);
-            var bookDetailsMapped = mapper.Map<Task<Book>, Task<GetBookView>>(bookDetails);
+            var bookDetailsMapped = Mapper.Map<Task<Book>, Task<GetBookView>>(bookDetails);
             return bookDetailsMapped;
         }
     }

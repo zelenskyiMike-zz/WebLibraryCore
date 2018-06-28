@@ -1,0 +1,74 @@
+[
+  {
+    "bookID": 1,
+    "genreID": 1,
+    "bookName": "Book1",
+    "yearOfPublish": 1998,
+    "bookGenres": {},
+    "authors": []
+  },
+  {
+    "bookID": 2,
+    "genreID": 1,
+    "bookName": "Book2",
+    "yearOfPublish": 1998,
+    "bookGenres": {},
+    "authors": []
+  },
+  {
+    "bookID": 3,
+    "genreID": 2,
+    "bookName": "Book3",
+    "yearOfPublish": 1988,
+    "bookGenres": {},
+    "authors": []
+  },
+  {
+    "bookID": 4,
+    "genreID": 3,
+    "bookName": "Book4",
+    "yearOfPublish": 1978,
+    "bookGenres": {},
+    "authors": []
+  },
+  {
+    "bookID": 5,
+    "genreID": 2,
+    "bookName": "Book5",
+    "yearOfPublish": 1968,
+    "bookGenres": {},
+    "authors": []
+  },
+  {
+    "bookID": 6,
+    "genreID": 1,
+    "bookName": "Book6",
+    "yearOfPublish": 1958,
+    "bookGenres": {},
+    "authors": []
+  },
+  {
+    "bookID": 7,
+    "genreID": 2,
+    "bookName": "Book7",
+    "yearOfPublish": 1948,
+    "bookGenres": {},
+    "authors": []
+  },
+  {
+    "bookID": 8,
+    "genreID": 3,
+    "bookName": "Book8",
+    "yearOfPublish": 1938,
+    "bookGenres": {},
+    "authors": []
+  },
+  {
+    "bookID": 9,
+    "genreID": 2,
+    "bookName": "Book9",
+    "yearOfPublish": 1928,
+    "bookGenres": {},
+    "authors": []
+  }
+]
