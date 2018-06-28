@@ -423,7 +423,7 @@ var BookListComponent = /** @class */ (function () {
         });
         console.log("Startup entity must be here");
     };
-    BookListComponent.prototype.addHandler = function (_a /*, formInstance*/) {
+    BookListComponent.prototype.addHandler = function (_a) {
         var sender = _a.sender;
         //formInstance.reset();
         this.closeEditor(sender);
@@ -439,7 +439,6 @@ var BookListComponent = /** @class */ (function () {
     };
     BookListComponent.prototype.removeHandler = function (_a) {
         var dataItem = _a.dataItem;
-        console.log("remove presed " + dataItem.bookID + 1);
         this.dataService.deleteBook(dataItem.bookID);
     };
     BookListComponent.prototype.closeEditor = function (grid, rowIndex) {
@@ -538,17 +537,15 @@ var DataBookService = /** @class */ (function (_super) {
         return this.http.get(this.url + '/get' + id);
     };
     DataBookService.prototype.createBook = function (book) {
-        console.log(book);
-        return this.http.post(this.url, book);
+        console.log(JSON.stringify(book));
+        return this.http.get(this.url, book);
     };
     DataBookService.prototype.updateBook = function (book) {
         return this.http.put(this.url + '/' + book.bookID, book);
     };
     DataBookService.prototype.deleteBook = function (id) {
-        //this.resetItem(this.getBook(id));
-        console.log(id + 1 + " from service");
-        console.log(this.url + '/delete/' + id + " from service");
-        return this.http.delete(this.url + '/delete/' + id);
+        console.log(this.url + '/delete/' + id);
+        return this.http.get(this.url + '/delete/' + id).toPromise();
     };
     DataBookService.prototype.save = function (data, isNew) {
         //const action = isNew ? this.createBook(data) : this.updateBook(data);
@@ -562,8 +559,6 @@ var DataBookService = /** @class */ (function (_super) {
             console.log("updated");
         }
         this.reset();
-        //this.fetch(action, data)
-        //  .subscribe(() => this.read(), () => this.read());
     };
     DataBookService.prototype.reset = function () {
         this.data = [11, 'b', 1111];

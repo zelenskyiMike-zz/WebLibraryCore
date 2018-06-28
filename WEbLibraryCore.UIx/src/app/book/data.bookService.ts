@@ -27,19 +27,16 @@ export class DataBookService extends BehaviorSubject<any[]> {
     return this.http.get(this.url + '/get' + id);
   }
   createBook<Book>(book: Book): Observable<Book> {
-    console.log(book);
-    return this.http.post<Book>(this.url, book);
+    console.log(JSON.stringify(book));
+    return this.http.get<Book>(this.url, book);
   }
 
   updateBook(book: Book) {
     return this.http.put(this.url + '/' + book.bookID, book);
   }
   deleteBook(id: number) {
-    //this.resetItem(this.getBook(id));
-    console.log(id + 1 + " from service");
-    console.log(this.url + '/delete/' + id + " from service");
-
-    return this.http.delete(this.url + '/delete/' + id);
+    console.log(this.url + '/delete/' + id);
+    return this.http.get(this.url + '/delete/' + id).toPromise();
   }
 
   public save(data: Book, isNew?: boolean) {
@@ -47,7 +44,7 @@ export class DataBookService extends BehaviorSubject<any[]> {
 
     if (isNew) {
       this.createBook(data);
-      console.log(data + " "+ isNew);
+      console.log(data + " " + isNew);
       console.log("created");
     }
     if (!isNew) {
@@ -56,13 +53,12 @@ export class DataBookService extends BehaviorSubject<any[]> {
     }
     this.reset();
 
-    //this.fetch(action, data)
-    //  .subscribe(() => this.read(), () => this.read());
+   
   }
 
 
   private reset() {
-    this.data = [11,'b',1111];
+    this.data = [11, 'b', 1111];
   }
 
   public resetItem(data: any) {

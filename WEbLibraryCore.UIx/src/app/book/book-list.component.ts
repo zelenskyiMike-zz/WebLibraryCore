@@ -28,7 +28,7 @@ export class BookListComponent implements OnInit {
 
   }
 
-  addHandler({ sender }/*, formInstance*/) {
+  addHandler({ sender }) {
     //formInstance.reset();
     this.closeEditor(sender);
     sender.addRow(new Book())
@@ -44,8 +44,6 @@ export class BookListComponent implements OnInit {
   }
 
   removeHandler({ dataItem }) {
-    console.log("remove presed " + dataItem.bookID +1);
-
     this.dataService.deleteBook(dataItem.bookID);
   }
 

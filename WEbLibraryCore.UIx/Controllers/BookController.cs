@@ -27,7 +27,8 @@ namespace WebLibraryCore.WebUI.Controllers
     }
 
     // GET: api/Book/5
-    [HttpGet("{id}")]
+    [HttpGet]
+    [Route("get/{id}")]
     public async Task<GetBookView> Get(int id)
     {
       //if (id == 0)
@@ -56,13 +57,13 @@ namespace WebLibraryCore.WebUI.Controllers
     }
 
     // DELETE: api/ApiWithActions/5
-    [HttpDelete]
-    [Route("delete")]
+    [HttpGet]
+    [Route("delete/{id}")]
     public IActionResult Delete(int id)
     {
       //Int32.TryParse(id, out int request);
       _bookService.Delete(id);
-      return Ok(id);
+      return NoContent();
     }
   }
 }
