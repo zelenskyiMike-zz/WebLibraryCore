@@ -379,7 +379,7 @@ var BookEditComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<base href=\"/\">\r\n<br />\r\n<div class=\"form-group\">\r\n  <label>List of books</label>\r\n</div>\r\n<!--<ng-template #readOnlyTemplate let-books>-->\r\n<kendo-grid [data]=\"books\"\r\n            [height]=\"420\"\r\n            (dataStateChange)=\"onStateChange($event)\"\r\n            (edit)=\"editHandler($event)\" (cancel)=\"cancelHandler($event)\"\r\n            (save)=\"saveHandler($event)\" (remove)=\"removeHandler($event)\"\r\n            (add)=\"addHandler($event)\"\r\n            [navigable]=\"true\">\r\n  <ng-template kendoGridToolbarTemplate>\r\n    <button kendoGridAddCommand type=\"button\">Add new</button>\r\n  </ng-template>\r\n   <kendo-grid-column field=\"genreID\" title=\"Genre\" width=\"70\">\r\n    <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n      <input [(ngModel)]=\"books.genreID\" kendoGridFocusable name=\"genreID\" class=\"k-textbox\" type=\"number\" required />\r\n    </ng-template>\r\n  </kendo-grid-column>\r\n  <kendo-grid-column field=\"bookName\" title=\"Name\" width=\"120\">\r\n    <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n      <input [(ngModel)]=\"books.bookName\" kendoGridFocusable name=\"bookName\" class=\"k-textbox\" required />\r\n    </ng-template>\r\n  </kendo-grid-column>\r\n  <kendo-grid-column field=\"yearOfPublish\" title=\"Year\">\r\n    <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n      <input [(ngModel)]=\"books.yearOfPublish\" kendoGridFocusable name=\"yearOfPublish\" class=\"k-textbox\" type=\"number\" min=\"876\" max=\"2018\" required />\r\n    </ng-template>\r\n  </kendo-grid-column>\r\n  <kendo-grid-command-column title=\"Action\" width=\"220\">\r\n    <ng-template kendoGridCellTemplate let-isNew=\"isNew\">\r\n      <!--<button kendoGridEditCommand type=\"button\" [primary]=\"true\">Edit</button>-->\r\n      <button kendoGridRemoveCommand type=\"button\">Remove</button>\r\n      <button kendoGridSaveCommand type=\"button\">\r\n        {{ isNew ? 'Save' : 'Update' }}\r\n      </button>\r\n      <button kendoGridCancelCommand type=\"button\">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>\r\n    </ng-template>\r\n  </kendo-grid-command-column>\r\n\r\n</kendo-grid>\r\n\r\n<br />\r\n\r\n<!--<form novalidate #myForm=\"ngForm\">\r\n  <kendo-grid [data]=\"view | async\"\r\n              [height]=\"533\"\r\n              [pageSize]=\"gridState.take\" [skip]=\"gridState.skip\" [sort]=\"gridState.sort\"\r\n              [pageable]=\"true\" [sortable]=\"true\"\r\n              (dataStateChange)=\"onStateChange($event)\"\r\n              (edit)=\"editHandler($event)\" (cancel)=\"cancelHandler($event)\"\r\n              (save)=\"saveHandler($event)\" (remove)=\"removeHandler($event)\"\r\n              (add)=\"addHandler($event, myForm)\"\r\n              [navigable]=\"true\">\r\n    <ng-template kendoGridToolbarTemplate>\r\n      <button kendoGridAddCommand type=\"button\">Add new</button>\r\n    </ng-template>\r\n    <kendo-grid-column field=\"bookName\" title=\"Book Name\">\r\n      <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n        <input [(ngModel)]=\"books.bookName\" kendoGridFocusable name=\"bookName\" class=\"k-textbox\" required />\r\n      </ng-template>\r\n    </kendo-grid-column>\r\n    <kendo-grid-column field=\"genreID\" editor=\"numeric\" title=\"Genre\">\r\n      <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n        <input [(ngModel)]=\"books.genreID\" kendoGridFocusable name=\"genreID\" class=\"k-textbox\" type=\"number\" />\r\n      </ng-template>\r\n    </kendo-grid-column>\r\n    <kendo-grid-column field=\"yearOfPublish\" editor=\"numeric\" title=\"Year Of Publish\">\r\n      <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n        <input [(ngModel)]=\"books.yearOfPublish\"\r\n               kendoGridFocusable\r\n               name=\"yearOfPublish\"\r\n               required\r\n               min=\"876\"\r\n               max=\"2018\"\r\n               class=\"k-textbox\"\r\n               type=\"number\" />\r\n      </ng-template>\r\n    </kendo-grid-column>\r\n    <kendo-grid-command-column title=\"command\" width=\"220\">\r\n      <ng-template kendoGridCellTemplate let-isNew=\"isNew\">\r\n        <button kendoGridEditCommand type=\"button\" [primary]=\"true\">Edit</button>\r\n        <button kendoGridRemoveCommand type=\"button\">Remove</button>\r\n        <button kendoGridSaveCommand type=\"button\"\r\n                [disabled]=\"myForm.invalid || myForm.pristine\">\r\n          {{ isNew ? 'Add' : 'Update' }}\r\n        </button>\r\n        <button kendoGridCancelCommand type=\"button\">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>\r\n      </ng-template>\r\n    </kendo-grid-command-column>\r\n  </kendo-grid>\r\n</form>-->\r\n"
+module.exports = "<base href=\"/\">\r\n<br />\r\n<div class=\"form-group\">\r\n  <label>List of books</label>\r\n</div>\r\n<!--<ng-template #readOnlyTemplate let-books>-->\r\n<kendo-grid [data]=\"books\"\r\n            [height]=\"420\"\r\n            (dataStateChange)=\"onStateChange($event)\"\r\n            (edit)=\"editHandler($event)\" (cancel)=\"cancelHandler($event)\"\r\n            (save)=\"saveHandler($event)\" (remove)=\"removeHandler($event)\"\r\n            (add)=\"addHandler($event)\"\r\n            [navigable]=\"true\"\r\n            (dataStateChange)=\"onStateChange($event)\">\r\n  <ng-template kendoGridToolbarTemplate>\r\n    <button kendoGridAddCommand type=\"button\">Add new</button>\r\n  </ng-template>\r\n   <kendo-grid-column field=\"genreID\" title=\"Genre\" width=\"70\">\r\n    <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n      <input [(ngModel)]=\"books.genreID\" kendoGridFocusable name=\"genreID\" class=\"k-textbox\" type=\"number\" required />\r\n    </ng-template>\r\n  </kendo-grid-column>\r\n  <kendo-grid-column field=\"bookName\" title=\"Name\" width=\"120\">\r\n    <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n      <input [(ngModel)]=\"books.bookName\" kendoGridFocusable name=\"bookName\" class=\"k-textbox\" required />\r\n    </ng-template>\r\n  </kendo-grid-column>\r\n  <kendo-grid-column field=\"yearOfPublish\" title=\"Year\">\r\n    <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n      <input [(ngModel)]=\"books.yearOfPublish\" kendoGridFocusable name=\"yearOfPublish\" class=\"k-textbox\" type=\"number\" min=\"876\" max=\"2018\" required />\r\n    </ng-template>\r\n  </kendo-grid-column>\r\n  <kendo-grid-command-column title=\"Action\" width=\"220\">\r\n    <ng-template kendoGridCellTemplate let-isNew=\"isNew\">\r\n      <!--<button kendoGridEditCommand type=\"button\" [primary]=\"true\">Edit</button>-->\r\n      <button kendoGridRemoveCommand type=\"button\">Remove</button>\r\n      <button kendoGridSaveCommand type=\"button\">\r\n        {{ isNew ? 'Save' : 'Update' }}\r\n      </button>\r\n      <button kendoGridCancelCommand type=\"button\">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>\r\n    </ng-template>\r\n  </kendo-grid-command-column>\r\n\r\n</kendo-grid>\r\n\r\n<br />\r\n\r\n<!--<form novalidate #myForm=\"ngForm\">\r\n  <kendo-grid [data]=\"view | async\"\r\n              [height]=\"533\"\r\n              [pageSize]=\"gridState.take\" [skip]=\"gridState.skip\" [sort]=\"gridState.sort\"\r\n              [pageable]=\"true\" [sortable]=\"true\"\r\n              (dataStateChange)=\"onStateChange($event)\"\r\n              (edit)=\"editHandler($event)\" (cancel)=\"cancelHandler($event)\"\r\n              (save)=\"saveHandler($event)\" (remove)=\"removeHandler($event)\"\r\n              (add)=\"addHandler($event, myForm)\"\r\n              [navigable]=\"true\">\r\n    <ng-template kendoGridToolbarTemplate>\r\n      <button kendoGridAddCommand type=\"button\">Add new</button>\r\n    </ng-template>\r\n    <kendo-grid-column field=\"bookName\" title=\"Book Name\">\r\n      <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n        <input [(ngModel)]=\"books.bookName\" kendoGridFocusable name=\"bookName\" class=\"k-textbox\" required />\r\n      </ng-template>\r\n    </kendo-grid-column>\r\n    <kendo-grid-column field=\"genreID\" editor=\"numeric\" title=\"Genre\">\r\n      <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n        <input [(ngModel)]=\"books.genreID\" kendoGridFocusable name=\"genreID\" class=\"k-textbox\" type=\"number\" />\r\n      </ng-template>\r\n    </kendo-grid-column>\r\n    <kendo-grid-column field=\"yearOfPublish\" editor=\"numeric\" title=\"Year Of Publish\">\r\n      <ng-template kendoGridEditTemplate let-dataItem=\"books\">\r\n        <input [(ngModel)]=\"books.yearOfPublish\"\r\n               kendoGridFocusable\r\n               name=\"yearOfPublish\"\r\n               required\r\n               min=\"876\"\r\n               max=\"2018\"\r\n               class=\"k-textbox\"\r\n               type=\"number\" />\r\n      </ng-template>\r\n    </kendo-grid-column>\r\n    <kendo-grid-command-column title=\"command\" width=\"220\">\r\n      <ng-template kendoGridCellTemplate let-isNew=\"isNew\">\r\n        <button kendoGridEditCommand type=\"button\" [primary]=\"true\">Edit</button>\r\n        <button kendoGridRemoveCommand type=\"button\">Remove</button>\r\n        <button kendoGridSaveCommand type=\"button\"\r\n                [disabled]=\"myForm.invalid || myForm.pristine\">\r\n          {{ isNew ? 'Add' : 'Update' }}\r\n        </button>\r\n        <button kendoGridCancelCommand type=\"button\">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>\r\n      </ng-template>\r\n    </kendo-grid-command-column>\r\n  </kendo-grid>\r\n</form>-->\r\n"
 
 /***/ }),
 
@@ -412,8 +412,18 @@ var BookListComponent = /** @class */ (function () {
     function BookListComponent(dataService) {
         this.dataService = dataService;
         this.books = [];
+        this.gridState = {
+            sort: [],
+            skip: 0,
+            take: 10
+        };
     }
     BookListComponent.prototype.ngOnInit = function () {
+        this.load();
+    };
+    BookListComponent.prototype.onStateChange = function (state) {
+        this.gridState = state;
+        console.log(state);
         this.load();
     };
     BookListComponent.prototype.load = function () {
@@ -426,7 +436,7 @@ var BookListComponent = /** @class */ (function () {
     BookListComponent.prototype.addHandler = function (_a) {
         var sender = _a.sender;
         //formInstance.reset();
-        this.closeEditor(sender);
+        //this.closeEditor(sender);
         sender.addRow(new _book__WEBPACK_IMPORTED_MODULE_2__["Book"]());
     };
     BookListComponent.prototype.saveHandler = function (_a) {
@@ -440,13 +450,6 @@ var BookListComponent = /** @class */ (function () {
     BookListComponent.prototype.removeHandler = function (_a) {
         var dataItem = _a.dataItem;
         this.dataService.deleteBook(dataItem.bookID);
-    };
-    BookListComponent.prototype.closeEditor = function (grid, rowIndex) {
-        if (rowIndex === void 0) { rowIndex = this.editedRowIndex; }
-        grid.closeRow(rowIndex);
-        this.dataService.resetItem(this.book);
-        this.editedRowIndex = undefined;
-        this.book = undefined;
     };
     BookListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -527,6 +530,10 @@ var DataBookService = /** @class */ (function (_super) {
         _this.url = 'http://localhost:49403/api/Book';
         _this.data = [];
         return _this;
+        //  const combined = Observable.combineLatest(
+        //    this.deleteBook(id);
+        //    this.getBooks();
+        //);
     }
     DataBookService.prototype.getBooks = function () {
         var result = this.http.get(this.url + '/getAll');
@@ -538,14 +545,15 @@ var DataBookService = /** @class */ (function (_super) {
     };
     DataBookService.prototype.createBook = function (book) {
         console.log(JSON.stringify(book));
-        return this.http.get(this.url, book);
+        return this.http.get(this.url + "/create", book);
     };
     DataBookService.prototype.updateBook = function (book) {
         return this.http.put(this.url + '/' + book.bookID, book);
     };
     DataBookService.prototype.deleteBook = function (id) {
+        //var delete =  this.http.get(this.url + '/delete/' + id).toPromise();
         console.log(this.url + '/delete/' + id);
-        return this.http.get(this.url + '/delete/' + id).toPromise();
+        return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].forkJoin(this.http.get(this.url + '/delete/' + id).toPromise(), this.http.get(this.url + '/getAll'));
     };
     DataBookService.prototype.save = function (data, isNew) {
         //const action = isNew ? this.createBook(data) : this.updateBook(data);
@@ -561,7 +569,7 @@ var DataBookService = /** @class */ (function (_super) {
         this.reset();
     };
     DataBookService.prototype.reset = function () {
-        this.data = [11, 'b', 1111];
+        this.data = [];
     };
     DataBookService.prototype.resetItem = function (data) {
         if (!data) {
@@ -570,9 +578,9 @@ var DataBookService = /** @class */ (function (_super) {
         if (function (item) { return item.bookID === data.bookID; }) {
             // find orignal data item
             var originalDataItem = this.getBook(data.bookID);
+            // revert changes
             Object.assign(originalDataItem, data);
         }
-        // revert changes
         _super.prototype.next.call(this, this.data);
     };
     DataBookService = __decorate([

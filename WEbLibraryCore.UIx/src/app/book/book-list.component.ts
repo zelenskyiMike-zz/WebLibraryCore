@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, TemplateRef, ViewChild } from '@angular/core';
 import { DataBookService } from './data.bookService';
 import { Book } from './book';
+import { State, process } from '@progress/kendo-data-query';
+import { state } from '@angular/animations';
 
 
 @Component({
@@ -14,9 +16,21 @@ export class BookListComponent implements OnInit {
   private editedRowIndex: number;
   private book: Book;
 
+  public gridState: State = {
+    sort: [],
+    skip: 0,
+    take: 10
+  };
+
   constructor(private dataService: DataBookService) { }
 
   ngOnInit() {
+    this.load();
+  }
+
+  public onStateChange(state: State) {
+    this.gridState = state;
+    console.log(state);
     this.load();
   }
 
@@ -30,7 +44,7 @@ export class BookListComponent implements OnInit {
 
   addHandler({ sender }) {
     //formInstance.reset();
-    this.closeEditor(sender);
+    //this.closeEditor(sender);
     sender.addRow(new Book())
   }
 
@@ -45,13 +59,6 @@ export class BookListComponent implements OnInit {
 
   removeHandler({ dataItem }) {
     this.dataService.deleteBook(dataItem.bookID);
-  }
-
-  private closeEditor(grid, rowIndex = this.editedRowIndex) {
-    grid.closeRow(rowIndex);
-    this.dataService.resetItem(this.book);
-    this.editedRowIndex = undefined;
-    this.book = undefined;
   }
 
   //public saveHandler({ sender, rowIndex, dataItem, isNew }) {

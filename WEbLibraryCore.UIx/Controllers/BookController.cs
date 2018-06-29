@@ -39,8 +39,9 @@ namespace WebLibraryCore.WebUI.Controllers
     }
 
     // POST: api/Book
-    [HttpPost]
-    public IActionResult Post([FromBody]GetBookView book)
+    [HttpGet]
+    [Route("create")]
+    public IActionResult Post(/*[FromBody]*/GetBookView book)
     {
       _bookService.Create(book);
 

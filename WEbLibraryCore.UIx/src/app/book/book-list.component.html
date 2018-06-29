@@ -10,7 +10,8 @@
             (edit)="editHandler($event)" (cancel)="cancelHandler($event)"
             (save)="saveHandler($event)" (remove)="removeHandler($event)"
             (add)="addHandler($event)"
-            [navigable]="true">
+            [navigable]="true"
+            (dataStateChange)="onStateChange($event)">
   <ng-template kendoGridToolbarTemplate>
     <button kendoGridAddCommand type="button">Add new</button>
   </ng-template>

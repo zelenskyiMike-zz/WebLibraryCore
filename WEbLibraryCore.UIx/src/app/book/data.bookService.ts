@@ -14,10 +14,15 @@ export class DataBookService extends BehaviorSubject<any[]> {
 
   constructor(private http: HttpClient) {
     super([]);
+
+    //  const combined = Observable.combineLatest(
+    //    this.deleteBook(id);
+    //    this.getBooks();
+    //);
   }
 
   getBooks(): Observable<Book[]> {
-    var result = this.http.get<Book[]>(this.url + '/getAll')
+    var result = this.http.get<Book[]>(this.url + '/getAll');
 
     console.log("here must be information from backend");
 
@@ -28,15 +33,19 @@ export class DataBookService extends BehaviorSubject<any[]> {
   }
   createBook<Book>(book: Book): Observable<Book> {
     console.log(JSON.stringify(book));
-    return this.http.get<Book>(this.url, book);
+    return this.http.get<Book>(this.url + "/create", book);
   }
 
   updateBook(book: Book) {
     return this.http.put(this.url + '/' + book.bookID, book);
   }
   deleteBook(id: number) {
+    //var delete =  this.http.get(this.url + '/delete/' + id).toPromise();
     console.log(this.url + '/delete/' + id);
-    return this.http.get(this.url + '/delete/' + id).toPromise();
+    return Observable.forkJoin(
+      this.http.get(this.url + '/delete/' + id).toPromise(),
+      this.getBooks()
+    );
   }
 
   public save(data: Book, isNew?: boolean) {
@@ -53,12 +62,12 @@ export class DataBookService extends BehaviorSubject<any[]> {
     }
     this.reset();
 
-   
+
   }
 
 
   private reset() {
-    this.data = [11, 'b', 1111];
+    this.data = [];
   }
 
   public resetItem(data: any) {
@@ -67,10 +76,11 @@ export class DataBookService extends BehaviorSubject<any[]> {
     if (item => item.bookID === data.bookID) {
       // find orignal data item
       const originalDataItem = this.getBook(data.bookID);
+      // revert changes
+
       Object.assign(originalDataItem, data);
 
     }
-    // revert changes
 
     super.next(this.data);
   }
