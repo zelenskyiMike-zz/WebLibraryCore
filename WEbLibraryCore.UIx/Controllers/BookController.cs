@@ -39,9 +39,9 @@ namespace WebLibraryCore.WebUI.Controllers
     }
 
     // POST: api/Book
-    [HttpGet]
+    [HttpPost]
     [Route("create")]
-    public IActionResult Post(/*[FromBody]*/GetBookView book)
+    public IActionResult Post([FromBody]GetBookView book)
     {
       _bookService.Create(book);
 
@@ -64,7 +64,7 @@ namespace WebLibraryCore.WebUI.Controllers
     {
       //Int32.TryParse(id, out int request);
       _bookService.Delete(id);
-      return NoContent();
+      return Ok(id);
     }
   }
 }

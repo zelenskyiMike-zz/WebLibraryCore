@@ -3,6 +3,7 @@ import { DataBookService } from './data.bookService';
 import { Book } from './book';
 import { State, process } from '@progress/kendo-data-query';
 import { state } from '@angular/animations';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -16,13 +17,19 @@ export class BookListComponent implements OnInit {
   private editedRowIndex: number;
   private book: Book;
 
+  public formGroup: FormGroup;
+
   public gridState: State = {
     sort: [],
     skip: 0,
     take: 10
   };
 
-  constructor(private dataService: DataBookService) { }
+
+
+  constructor(private dataService: DataBookService, private formBuilder: FormBuilder) {
+    this.createFormGroup = this.createFormGroup.bind(this);
+  }
 
   ngOnInit() {
     this.load();
@@ -42,31 +49,52 @@ export class BookListComponent implements OnInit {
 
   }
 
-  addHandler({ sender }) {
+  addHandler({ sender, dataItem }) {
     //formInstance.reset();
     //this.closeEditor(sender);
     sender.addRow(new Book())
   }
 
   public saveHandler({ sender, rowIndex, dataItem, isNew }) {
+    debugger;
     // update the data source
-    console.log(JSON.stringify(dataItem) + " from component");
-    this.dataService.save(dataItem, isNew);
+    if (isNew) {
+      console.log(JSON.stringify(dataItem) + " from component");
 
-    // close the editor, that is, revert the row back into view mode
-    sender.closeRow(rowIndex);
+      this.dataService.save(dataItem, isNew);
+
+      // close the editor, that is, revert the row back into view mode
+      sender.closeRow(rowIndex);
+    }
+    if (!isNew) {
+      console.log(JSON.stringify(dataItem) + " from component");
+      this.dataService.updateBook(dataItem);
+        
+      // close the editor, that is, revert the row back into view mode
+      sender.closeRow(rowIndex);
+    }
+
   }
 
   removeHandler({ dataItem }) {
     this.dataService.deleteBook(dataItem.bookID);
   }
 
-  //public saveHandler({ sender, rowIndex, dataItem, isNew }) {
-  //  this.dataService.save(dataItem, isNew);
+  public createFormGroup(args: any): /*Book*/ any {
+    const item = args.isNew ? new Book() : args.dataItem;
+    debugger;
+    this.formGroup = this.formBuilder.group({
+      //'BookID': item.bookID,
+      'bookName': [item.bookName, Validators.required],
+      'genreID': item.genreID,
+      'yearOfPublish': [item.yearOfPublish, Validators.compose([Validators.required, Validators.pattern('^[0-9]{1,3}')])]
+    });
 
-  //  sender.closeRow(rowIndex);
+    return this.formGroup;
+  }
 
-  //  this.editedRowIndex = undefined;
-  //  this.book = undefined;
-  //}
+  editHandler({ dataItem }) {
+    console.log(JSON.stringify(dataItem) + " from HANDLER");
+    this.dataService.updateBook(dataItem);
+  }
 }

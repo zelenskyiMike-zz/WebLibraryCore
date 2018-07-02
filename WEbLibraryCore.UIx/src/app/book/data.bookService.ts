@@ -32,29 +32,29 @@ export class DataBookService extends BehaviorSubject<any[]> {
     return this.http.get(this.url + '/get' + id);
   }
   createBook<Book>(book: Book): Observable<Book> {
-    console.log(JSON.stringify(book));
-    return this.http.get<Book>(this.url + "/create", book);
-  }
+    console.log(JSON.stringify(book) + " thats ceratng");
+    console.log(this.url + "/create", book);
 
+    return this.http.post<Book>(this.url + "/create", book)/*.toPromise()*/;
+  }
+    
   updateBook(book: Book) {
     return this.http.put(this.url + '/' + book.bookID, book);
   }
   deleteBook(id: number) {
-    //var delete =  this.http.get(this.url + '/delete/' + id).toPromise();
     console.log(this.url + '/delete/' + id);
-    return Observable.forkJoin(
-      this.http.get(this.url + '/delete/' + id).toPromise(),
-      this.getBooks()
-    );
+
+    return this.http.get(this.url + '/delete/' + id);
   }
 
   public save(data: Book, isNew?: boolean) {
     //const action = isNew ? this.createBook(data) : this.updateBook(data);
 
     if (isNew) {
+      console.log(data.bookName + " BookName");
+
       this.createBook(data);
-      console.log(data + " " + isNew);
-      console.log("created");
+      console.log(JSON.stringify(data) + " HERE");
     }
     if (!isNew) {
       this.updateBook(data);

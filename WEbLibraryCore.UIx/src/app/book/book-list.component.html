@@ -6,16 +6,16 @@
 <!--<ng-template #readOnlyTemplate let-books>-->
 <kendo-grid [data]="books"
             [height]="420"
-            (dataStateChange)="onStateChange($event)"
             (edit)="editHandler($event)" (cancel)="cancelHandler($event)"
             (save)="saveHandler($event)" (remove)="removeHandler($event)"
             (add)="addHandler($event)"
             [navigable]="true"
-            (dataStateChange)="onStateChange($event)">
+            (dataStateChange)="onStateChange($event)"
+            [kendoGridReactiveEditing]="createFormGroup">
   <ng-template kendoGridToolbarTemplate>
     <button kendoGridAddCommand type="button">Add new</button>
   </ng-template>
-   <kendo-grid-column field="genreID" title="Genre" width="70">
+  <kendo-grid-column field="genreID" title="Genre" width="70">
     <ng-template kendoGridEditTemplate let-dataItem="books">
       <input [(ngModel)]="books.genreID" kendoGridFocusable name="genreID" class="k-textbox" type="number" required />
     </ng-template>
@@ -32,7 +32,7 @@
   </kendo-grid-column>
   <kendo-grid-command-column title="Action" width="220">
     <ng-template kendoGridCellTemplate let-isNew="isNew">
-      <!--<button kendoGridEditCommand type="button" [primary]="true">Edit</button>-->
+      <button kendoGridEditCommand type="button" [primary]="true">Edit</button>
       <button kendoGridRemoveCommand type="button">Remove</button>
       <button kendoGridSaveCommand type="button">
         {{ isNew ? 'Save' : 'Update' }}

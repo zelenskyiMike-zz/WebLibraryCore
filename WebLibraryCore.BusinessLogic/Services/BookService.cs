@@ -42,9 +42,9 @@ namespace WebLibraryCore.BusinessLogic.Services
             await bookRepository.Update(book);
         }
 
-        public async void Delete(int id)
+        public /*async*/ void Delete(int id)
         {
-            await bookRepository.Delete(id);
+            /*await*/ bookRepository.Delete(id);
         }
 
 
