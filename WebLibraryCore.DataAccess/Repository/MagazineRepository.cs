@@ -42,18 +42,18 @@ namespace WebLibraryCore.DataAccess.Repository
 
         public async Task<Magazine> GetMagazineDetails(int id)
         {
-            var magazine = await GetByID(id);
-            MagazineGenre genre = context.MagazineGenres.Where(x => x.MagazineGenreID == magazine.MagazineGenreID).SingleOrDefault();
+            var magazine = /*await GetByID(id)*/ id;
+            //MagazineGenre genre = context.MagazineGenres.Where(x => x.MagazineGenreID == magazine.MagazineGenreID).SingleOrDefault();
 
             //var authorList = book.BookAuthors.Where(x => x.BookID == book.BookID).Select(x => x.Authors).ToList();
 
             Magazine magazineVM = new Magazine()
             {
-                MagazineID = magazine.MagazineID,
-                MagazineName = magazine.MagazineName,
-                DateOfMagazinePublish= magazine.DateOfMagazinePublish,
-                MagazineGenres = genre
-                //Authors = authorList
+                //MagazineID = magazine.MagazineID,
+                //MagazineName = magazine.MagazineName,
+                //DateOfMagazinePublish= magazine.DateOfMagazinePublish,
+                //MagazineGenres = genre
+                ////Authors = authorList
             };
             return magazineVM;
         }

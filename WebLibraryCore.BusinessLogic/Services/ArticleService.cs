@@ -21,16 +21,16 @@ namespace WebLibraryCore.BusinessLogic.Services
             articleRepository = new ArticleRepository(context);
         }
 
-        public async void Create(GetArticleView articleView)
+        public /*async*/ void Create(GetArticleView articleView)
         {
             var article = Mapper.Map<GetArticleView, Article>(articleView);
-            await articleRepository.Create(article);
+            /*await*/ articleRepository.Create(article);
         }
 
         public Task<GetArticleView> GetarticleByID(int id)
         {
             var article = articleRepository.GetByID(id);
-            var articleMaped = Mapper.Map<Task<Article>, Task<GetArticleView>>(article);
+            var articleMaped = Mapper.Map</*Task<*/Article, Task<GetArticleView>>(article);
             return articleMaped;
         }
 
@@ -40,9 +40,9 @@ namespace WebLibraryCore.BusinessLogic.Services
             await articleRepository.Update(article);
         }
 
-        public async void Delete(int id)
+        public /*async*/ void Delete(int id)
         {
-            await articleRepository.Delete(id);
+            /*await*/ articleRepository.Delete(id);
         }
 
 

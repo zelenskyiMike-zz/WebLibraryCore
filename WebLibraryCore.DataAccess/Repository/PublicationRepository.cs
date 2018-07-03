@@ -42,18 +42,18 @@ namespace WebLibraryCore.DataAccess.Repository
 
         public async Task<Publication> GetPublicationDetails(int id)
         {
-            var publication = await GetByID(id);
-            PublicationGenre genre = context.PublicationGenres.Where(x => x.PublicationGenreID == publication.PublicationGenreID).SingleOrDefault();
+            var publication = /*await GetByID(id)*/id;
+            //PublicationGenre genre = context.PublicationGenres.Where(x => x.PublicationGenreID == publication.PublicationGenreID).SingleOrDefault();
 
             //var authorList = book.BookAuthors.Where(x => x.BookID == book.BookID).Select(x => x.Authors).ToList();
 
             Publication publicationVM = new Publication()
             {
-                PublicationID = publication.PublicationID,
-                PublicationName = publication.PublicationName,
-                DateOfPublicationPublish = publication.DateOfPublicationPublish,
-                PublicationGenres = genre
-                //Authors = authorList
+                //PublicationID = publication.PublicationID,
+                //PublicationName = publication.PublicationName,
+                //DateOfPublicationPublish = publication.DateOfPublicationPublish,
+                //PublicationGenres = genre
+                ////Authors = authorList
             };
             return publicationVM;
         }

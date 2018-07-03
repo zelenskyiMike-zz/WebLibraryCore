@@ -15,10 +15,10 @@ namespace WebLibraryCore.DataAccess.Repository
         {
             this.context = context;
         }
-        public async Task Create(TEntity entity)
+        public /*async Task*/void Create(TEntity entity)
         {
-            await context.Set<TEntity>().AddAsync(entity);
-            await context.SaveChangesAsync();
+            /*await*/ context.Set<TEntity>().Add/*Async*/(entity);
+            /*await*/ context.SaveChanges/*Async*/();
         }
 
         public async Task Update(TEntity entity)
@@ -27,16 +27,16 @@ namespace WebLibraryCore.DataAccess.Repository
             await context.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public void /*async Task*/ Delete(int id)
         {
-            var  entity = await GetByID(id);
+            var  entity = /*await*/ GetByID(id);
             context.Set<TEntity>().Remove(entity);
-            await context.SaveChangesAsync();
+            /*await */context.SaveChangesAsync();
         }
 
-        public async Task<TEntity> GetByID(int id)
+        public /*async Task<*/TEntity/*>*/ GetByID(int id)
         {
-            return await context.Set<TEntity>().FindAsync(id);
+            return /*await*/ context.Set<TEntity>().Find/*Async*/(id);
 
             //return await context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync();
         }

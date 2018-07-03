@@ -1,8 +1,15 @@
 export class Book {
-  //constructor(
+  constructor(
+  public bookID: number,
+  public genreID: number,
+  public bookName: string,
+  public yearOfPublish: number
+  ) { }
+}
+
+
+/* 
   public bookID: number;
   public genreID: number;
   public bookName: string;
-  public yearOfPublish: number
-  //) { }
-}
+  public yearOfPublish: number*/

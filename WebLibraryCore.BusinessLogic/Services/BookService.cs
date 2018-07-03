@@ -23,16 +23,16 @@ namespace WebLibraryCore.BusinessLogic.Services
         }
 
 
-        public async void Create(GetBookView bookView)
+        public /*async*/ void Create(GetBookView bookView)
         {
             var book = Mapper.Map<GetBookView, Book>(bookView);
-            await bookRepository.Create(book);
+            /*await*/ bookRepository.Create(book);
         }
 
         public Task<GetBookView> GetBookByID(int id)
         {
             var book = bookRepository.GetByID(id);
-            var bookMaped = Mapper.Map<Task<Book>, Task<GetBookView>>(book);
+            var bookMaped = Mapper.Map</*Task<*/Book/*>*/, Task<GetBookView>>(book);
             return bookMaped;
         }
 

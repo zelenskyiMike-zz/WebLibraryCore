@@ -21,16 +21,16 @@ namespace WebLibraryCore.BusinessLogic.Services
             authorsRepository = new AuthorRepository(context);
         }
 
-        public async void Create(GetAuthorView authorView)
+        public /*async*/ void Create(GetAuthorView authorView)
         {
             var authors = Mapper.Map<GetAuthorView, Author>(authorView);
-            await authorsRepository.Create(authors);
+            /*await*/ authorsRepository.Create(authors);
         }
 
         public Task<GetAuthorView> GetAuthorByID(int id)
         {
             var authors = authorsRepository.GetByID(id);
-            var authorsMaped = Mapper.Map<Task<Author>, Task<GetAuthorView>>(authors);
+            var authorsMaped = Mapper.Map</*Task<*/Author, Task<GetAuthorView>>(authors);
             return authorsMaped;
         }
 
@@ -40,9 +40,9 @@ namespace WebLibraryCore.BusinessLogic.Services
             await authorsRepository.Update(authors);
         }
 
-        public async void Delete(int id)
+        public /*async*/ void Delete(int id)
         {
-            await authorsRepository.Delete(id);
+            /*await*/ authorsRepository.Delete(id);
         }
 
 

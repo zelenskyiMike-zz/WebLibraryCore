@@ -37,7 +37,8 @@ export class BookListComponent implements OnInit {
 
   public onStateChange(state: State) {
     this.gridState = state;
-    console.log(state);
+    debugger;
+
     this.load();
   }
 
@@ -52,19 +53,24 @@ export class BookListComponent implements OnInit {
   addHandler({ sender, dataItem }) {
     //formInstance.reset();
     //this.closeEditor(sender);
-    sender.addRow(new Book())
+    sender.addRow()
+    debugger;
   }
 
   public saveHandler({ sender, rowIndex, dataItem, isNew }) {
-    debugger;
     // update the data source
     if (isNew) {
-      console.log(JSON.stringify(dataItem) + " from component");
-
-      this.dataService.save(dataItem, isNew);
-
+      //console.log(JSON.stringify(dataItem) + " from component");
+      debugger;
+      //this.formGroup.patchValue({ bookName: 'ada', genreID: 1, yearOfPublish: 1234 });
+      //dataItem = this.formGroup.value;
+      //console.log(JSON.stringify(this.formGroup.value) + " from component");
+      let data = this.createFormGroup(dataItem);
+      this.dataService.createBook(data);
+      debugger;
       // close the editor, that is, revert the row back into view mode
-      sender.closeRow(rowIndex);
+      sender.saveRow();
+      //sender.closeRow(rowIndex);
     }
     if (!isNew) {
       console.log(JSON.stringify(dataItem) + " from component");
@@ -80,21 +86,24 @@ export class BookListComponent implements OnInit {
     this.dataService.deleteBook(dataItem.bookID);
   }
 
-  public createFormGroup(args: any): /*Book*/ any {
-    const item = args.isNew ? new Book() : args.dataItem;
+  public createFormGroup(args: any) {
+    const item = args.isNew ? new Book(null,null,'',null) : args.dataItem;
     debugger;
-    this.formGroup = this.formBuilder.group({
-      //'BookID': item.bookID,
+    this.formGroup = this.formBuilder.group({ 
+      'bookID': item.bookID,
       'bookName': [item.bookName, Validators.required],
       'genreID': item.genreID,
       'yearOfPublish': [item.yearOfPublish, Validators.compose([Validators.required, Validators.pattern('^[0-9]{1,3}')])]
     });
-
+    debugger;
     return this.formGroup;
   }
 
+
   editHandler({ dataItem }) {
     console.log(JSON.stringify(dataItem) + " from HANDLER");
-    this.dataService.updateBook(dataItem);
+    this.createFormGroup(dataItem);
+    debugger;
+    //this.dataService.updateBook(dataItem);
   }
 }

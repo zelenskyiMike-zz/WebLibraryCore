@@ -427,7 +427,7 @@ var BookListComponent = /** @class */ (function () {
     };
     BookListComponent.prototype.onStateChange = function (state) {
         this.gridState = state;
-        console.log(state);
+        debugger;
         this.load();
     };
     BookListComponent.prototype.load = function () {
@@ -441,17 +441,24 @@ var BookListComponent = /** @class */ (function () {
         var sender = _a.sender, dataItem = _a.dataItem;
         //formInstance.reset();
         //this.closeEditor(sender);
-        sender.addRow(new _book__WEBPACK_IMPORTED_MODULE_2__["Book"]());
+        sender.addRow();
+        debugger;
     };
     BookListComponent.prototype.saveHandler = function (_a) {
         var sender = _a.sender, rowIndex = _a.rowIndex, dataItem = _a.dataItem, isNew = _a.isNew;
-        debugger;
         // update the data source
         if (isNew) {
-            console.log(JSON.stringify(dataItem) + " from component");
-            this.dataService.save(dataItem, isNew);
+            //console.log(JSON.stringify(dataItem) + " from component");
+            debugger;
+            //this.formGroup.patchValue({ bookName: 'ada', genreID: 1, yearOfPublish: 1234 });
+            //dataItem = this.formGroup.value;
+            //console.log(JSON.stringify(this.formGroup.value) + " from component");
+            var data = this.createFormGroup(dataItem);
+            this.dataService.createBook(data);
+            debugger;
             // close the editor, that is, revert the row back into view mode
-            sender.closeRow(rowIndex);
+            sender.saveRow();
+            //sender.closeRow(rowIndex);
         }
         if (!isNew) {
             console.log(JSON.stringify(dataItem) + " from component");
@@ -465,20 +472,23 @@ var BookListComponent = /** @class */ (function () {
         this.dataService.deleteBook(dataItem.bookID);
     };
     BookListComponent.prototype.createFormGroup = function (args) {
-        var item = args.isNew ? new _book__WEBPACK_IMPORTED_MODULE_2__["Book"]() : args.dataItem;
+        var item = args.isNew ? new _book__WEBPACK_IMPORTED_MODULE_2__["Book"](null, null, '', null) : args.dataItem;
         debugger;
         this.formGroup = this.formBuilder.group({
-            //'BookID': item.bookID,
+            'bookID': item.bookID,
             'bookName': [item.bookName, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
             'genreID': item.genreID,
             'yearOfPublish': [item.yearOfPublish, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]{1,3}')])]
         });
+        debugger;
         return this.formGroup;
     };
     BookListComponent.prototype.editHandler = function (_a) {
         var dataItem = _a.dataItem;
         console.log(JSON.stringify(dataItem) + " from HANDLER");
-        this.dataService.updateBook(dataItem);
+        this.createFormGroup(dataItem);
+        debugger;
+        //this.dataService.updateBook(dataItem);
     };
     BookListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -505,11 +515,20 @@ var BookListComponent = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Book", function() { return Book; });
 var Book = /** @class */ (function () {
-    function Book() {
+    function Book(bookID, genreID, bookName, yearOfPublish) {
+        this.bookID = bookID;
+        this.genreID = genreID;
+        this.bookName = bookName;
+        this.yearOfPublish = yearOfPublish;
     }
     return Book;
 }());
 
+/*
+  public bookID: number;
+  public genreID: number;
+  public bookName: string;
+  public yearOfPublish: number*/
 
 
 /***/ }),
@@ -559,43 +578,26 @@ var DataBookService = /** @class */ (function (_super) {
         _this.url = 'http://localhost:49403/api/Book';
         _this.data = [];
         return _this;
-        //  const combined = Observable.combineLatest(
-        //    this.deleteBook(id);
-        //    this.getBooks();
-        //);
     }
     DataBookService.prototype.getBooks = function () {
         var result = this.http.get(this.url + '/getAll');
-        console.log("here must be information from backend");
         return result;
     };
     DataBookService.prototype.getBook = function (id) {
-        return this.http.get(this.url + '/get' + id);
+        var result = this.http.get(this.url + '/get' + id);
+        return result;
     };
     DataBookService.prototype.createBook = function (book) {
-        console.log(JSON.stringify(book) + " thats ceratng");
-        console.log(this.url + "/create", book);
-        return this.http.post(this.url + "/create", book) /*.toPromise()*/;
+        var result = this.http.post(this.url + "/create", book).toPromise();
+        return result;
     };
     DataBookService.prototype.updateBook = function (book) {
-        return this.http.put(this.url + '/' + book.bookID, book);
+        var result = this.http.put(this.url + '/' + book.bookID, book);
+        return result;
     };
     DataBookService.prototype.deleteBook = function (id) {
-        console.log(this.url + '/delete/' + id);
-        return this.http.get(this.url + '/delete/' + id);
-    };
-    DataBookService.prototype.save = function (data, isNew) {
-        //const action = isNew ? this.createBook(data) : this.updateBook(data);
-        if (isNew) {
-            console.log(data.bookName + " BookName");
-            this.createBook(data);
-            console.log(JSON.stringify(data) + " HERE");
-        }
-        if (!isNew) {
-            this.updateBook(data);
-            console.log("updated");
-        }
-        this.reset();
+        var result = this.http.get(this.url + '/delete/' + id).toPromise();
+        return result;
     };
     DataBookService.prototype.reset = function () {
         this.data = [];

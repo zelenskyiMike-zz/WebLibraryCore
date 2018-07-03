@@ -9,9 +9,9 @@ namespace WebLibraryCore.DataAccess.Interfaces
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {
-        Task Create(TEntity entity);
-        Task<TEntity> GetByID(int id);
+        /*Task*/void Create(TEntity entity);
+        /*Task<*/TEntity/*> */GetByID(int id);
         Task Update(TEntity entity);
-        Task Delete(int id);
+        /*Task*/void Delete(int id);
     }
 }

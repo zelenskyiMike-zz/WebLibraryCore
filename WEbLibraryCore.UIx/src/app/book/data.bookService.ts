@@ -14,57 +14,34 @@ export class DataBookService extends BehaviorSubject<any[]> {
 
   constructor(private http: HttpClient) {
     super([]);
-
-    //  const combined = Observable.combineLatest(
-    //    this.deleteBook(id);
-    //    this.getBooks();
-    //);
   }
 
   getBooks(): Observable<Book[]> {
-    var result = this.http.get<Book[]>(this.url + '/getAll');
-
-    console.log("here must be information from backend");
+    let result = this.http.get<Book[]>(this.url + '/getAll');
 
     return result;
   }
   getBook<Book>(id: number) {
-    return this.http.get(this.url + '/get' + id);
+    let result = this.http.get(this.url + '/get' + id);
+
+    return result;
   }
   createBook<Book>(book: Book): Observable<Book> {
-    console.log(JSON.stringify(book) + " thats ceratng");
-    console.log(this.url + "/create", book);
+    let result = this.http.post<Book>(this.url + "/create", book).toPromise();
 
-    return this.http.post<Book>(this.url + "/create", book)/*.toPromise()*/;
+    return result;
   }
     
   updateBook(book: Book) {
-    return this.http.put(this.url + '/' + book.bookID, book);
+    let result = this.http.put(this.url + '/' + book.bookID, book);
+
+    return result;
   }
   deleteBook(id: number) {
-    console.log(this.url + '/delete/' + id);
+    let result = this.http.get(this.url + '/delete/' + id).toPromise();
 
-    return this.http.get(this.url + '/delete/' + id);
+    return result;
   }
-
-  public save(data: Book, isNew?: boolean) {
-    //const action = isNew ? this.createBook(data) : this.updateBook(data);
-
-    if (isNew) {
-      console.log(data.bookName + " BookName");
-
-      this.createBook(data);
-      console.log(JSON.stringify(data) + " HERE");
-    }
-    if (!isNew) {
-      this.updateBook(data);
-      console.log("updated");
-    }
-    this.reset();
-
-
-  }
-
 
   private reset() {
     this.data = [];

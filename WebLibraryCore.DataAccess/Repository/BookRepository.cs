@@ -41,19 +41,19 @@ namespace WebLibraryCore.DataAccess.Repository
 
         public async Task<Book> GetBookDetails(int id)
         {
-            var book = await GetByID(id);
-            BookGenre genre = context.BookGenres.Where(x => x.GenreID == book.GenreID).SingleOrDefault();
+            var book = /*await GetByID(id)*/ id;
+            //BookGenre genre = context.BookGenres.Where(x => x.GenreID == book.GenreID).SingleOrDefault();
 
 //            var authorList = book.BookAuthors.Where(x => x.BookID == book.BookID).Select(x => x.Authors).ToList();
 
             Book bookVM = new Book()
             {
-                BookID = book.BookID,
-                BookName = book.BookName,
-                GenreID = book.GenreID,
-                YearOfPublish = book.YearOfPublish,
-                BookGenres = genre
-                //AuthorsIDs = authorList
+                //BookID = book.BookID,
+                //BookName = book.BookName,
+                //GenreID = book.GenreID,
+                //YearOfPublish = book.YearOfPublish,
+                //BookGenres = genre
+                ////AuthorsIDs = authorList
             };
             return bookVM;
         }
