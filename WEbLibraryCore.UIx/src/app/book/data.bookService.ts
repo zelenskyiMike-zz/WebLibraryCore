@@ -8,9 +8,12 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class DataBookService extends BehaviorSubject<any[]> {
+  behaviorSubject: any;
   private url = 'http://localhost:49403/api/Book';
 
   private data: any[] = [];
+
+  public behavorSubject : any = new BehaviorSubject(this.data);
 
   constructor(private http: HttpClient) {
     super([]);
@@ -27,7 +30,13 @@ export class DataBookService extends BehaviorSubject<any[]> {
     return result;
   }
   createBook<Book>(book: Book): Observable<Book> {
-    let result = this.http.post<Book>(this.url + "/create", book).toPromise();
+    let result = this.http.post<Book>(this.url + "/create", book)/*.toPromise()*/;
+    debugger;
+    //let resultWrong = this.http.post<Book>(this.url + "/create", book);
+
+    //let currentValue = this.behaviorSubject.getValue();
+
+    //console.log(currentValue);
 
     return result;
   }

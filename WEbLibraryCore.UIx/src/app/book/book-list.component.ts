@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { DataBookService } from './data.bookService';
 import { Book } from './book';
 import { State, process } from '@progress/kendo-data-query';
@@ -16,6 +16,8 @@ export class BookListComponent implements OnInit {
 
   private editedRowIndex: number;
   private book: Book;
+
+  public viewRef: ViewContainerRef;
 
   public formGroup: FormGroup;
 
@@ -46,14 +48,12 @@ export class BookListComponent implements OnInit {
     this.dataService.getBooks().subscribe(data => {
       this.books = data;
     });
-    console.log("Startup entity must be here");
-
   }
 
   addHandler({ sender, dataItem }) {
     //formInstance.reset();
     //this.closeEditor(sender);
-    sender.addRow()
+    sender.addRow(new Book(null, null, '', null))
     debugger;
   }
 
@@ -61,13 +61,21 @@ export class BookListComponent implements OnInit {
     // update the data source
     if (isNew) {
       //console.log(JSON.stringify(dataItem) + " from component");
-      debugger;
+   
       //this.formGroup.patchValue({ bookName: 'ada', genreID: 1, yearOfPublish: 1234 });
       //dataItem = this.formGroup.value;
       //console.log(JSON.stringify(this.formGroup.value) + " from component");
-      let data = this.createFormGroup(dataItem);
-      this.dataService.createBook(data);
+
+
+      //let data2 = this.viewRef.get(rowIndex);
+
+      //let data = this.createFormGroup(dataItem);
+
       debugger;
+     // let formData = this.formGroup.d
+      this.dataService.createBook(dataItem);
+      //console.log(this.dataService.createBook(this.createFormGroup(dataItem)));
+     // debugger;
       // close the editor, that is, revert the row back into view mode
       sender.saveRow();
       //sender.closeRow(rowIndex);
@@ -86,17 +94,17 @@ export class BookListComponent implements OnInit {
     this.dataService.deleteBook(dataItem.bookID);
   }
 
-  public createFormGroup(args: any) {
+  public createFormGroup(args: any): FormGroup {
     const item = args.isNew ? new Book(null,null,'',null) : args.dataItem;
-    debugger;
-    this.formGroup = this.formBuilder.group({ 
+    this.formGroup = this.formBuilder.group({
       'bookID': item.bookID,
       'bookName': [item.bookName, Validators.required],
       'genreID': item.genreID,
       'yearOfPublish': [item.yearOfPublish, Validators.compose([Validators.required, Validators.pattern('^[0-9]{1,3}')])]
     });
-    debugger;
-    return this.formGroup;
+
+    return this.formGroup/*.value*/;
+   //return this.formGroup.patchValue();
   }
 
 
