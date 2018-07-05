@@ -4,6 +4,8 @@ import { Book } from './book';
 import { State, process } from '@progress/kendo-data-query';
 import { state } from '@angular/animations';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { GridComponent } from '@progress/kendo-angular-grid';
+import { send } from 'q';
 
 
 @Component({
@@ -16,10 +18,12 @@ export class BookListComponent implements OnInit {
 
   private editedRowIndex: number;
   private book: Book;
-
-  public viewRef: ViewContainerRef;
-
+  private isNew: false;
+  @ViewChild(GridComponent) private grid: GridComponent;
   public formGroup: FormGroup;
+  public get isInEditingMode(): boolean {
+    return this.editedRowIndex !== undefined || this.isNew;
+  }
 
   public gridState: State = {
     sort: [],
@@ -61,20 +65,34 @@ export class BookListComponent implements OnInit {
     }
     if (!isNew) {
       console.log(JSON.stringify(dataItem) + " from component");
-      this.dataService.updateBook(dataItem);
+      this.dataService.updateBook(this.formGroup.value);
         
       // close the editor, that is, revert the row back into view mode
-      sender.closeRow(rowIndex);
+      //sender.closeRow(rowIndex);
+      sender.collapseRow(rowIndex);
     }
 
     this.ngOnInit();
   }
 
-  editHandler({ sender, dataItem, rowIndex }) {
-    /*new Book(dataItem.bookID, dataItem.genreID, dataItem.bookName, dataItem.yearOfPublish)*/
-    console.log(JSON.stringify(dataItem) + " from HANDLER");
-    sender.editRow(rowIndex,new Book(dataItem.bookID, dataItem.genreID, dataItem.bookName, dataItem.yearOfPublish));
+  editHandler({ sender, dataItem, rowIndex, colIndex }) {
+    ///*new Book(dataItem.bookID, dataItem.genreID, dataItem.bookName, dataItem.yearOfPublish)*/
+    //console.log(JSON.stringify(dataItem) + " from HANDLER");
+    //sender.addRow(rowIndex, dataItem/*, this.formGroup.value*//*  .get(dataItem)*/);
+
+    if (this.formGroup && !this.formGroup.valid) {
+      return;
+    }
+
+    //this.saveRow();
+    this.formGroup = this.formBuilder.group(dataItem);
+    this.editedRowIndex = rowIndex;
+    sender.editRow(rowIndex, this.formGroup);
+    setTimeout(() => {
+      
+    });
     debugger;
+
   }
 
   removeHandler({ dataItem }) {
@@ -92,5 +110,19 @@ export class BookListComponent implements OnInit {
     });
 
     return this.formGroup;
+  }
+
+  private saveRow(): void {
+    if (this.isInEditingMode) {
+      this.saveHandler(this.formGroup.value);
+    }
+
+    this.closeEditor(this.grid);
+  }
+  private closeEditor(grid: GridComponent, rowIndex: number = this.editedRowIndex): void {
+    this.isNew = false;
+    grid.closeRow(rowIndex);
+    this.editedRowIndex = undefined;
+    this.formGroup = undefined;
   }
 }

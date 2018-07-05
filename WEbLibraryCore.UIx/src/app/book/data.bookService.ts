@@ -31,8 +31,8 @@ export class DataBookService extends BehaviorSubject<any[]> {
   }
   createBook<Book>(book: Book): Observable<Book> {
     debugger;
-    let result = this.http.post<Book>(this.url + "/create", book).toPromise();
-    this.getBooks();
+    let result = this.http.post<Book>(this.url + "/create", book)/*.toPromise()*/;
+    //this.getBooks();
     return result;
   }
     
