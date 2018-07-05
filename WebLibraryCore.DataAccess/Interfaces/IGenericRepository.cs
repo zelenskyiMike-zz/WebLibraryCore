@@ -11,7 +11,7 @@ namespace WebLibraryCore.DataAccess.Interfaces
     {
         /*Task*/void Create(TEntity entity);
         /*Task<*/TEntity/*> */GetByID(int id);
-        Task Update(TEntity entity);
+        /*Task*/void Update(TEntity entity);
         /*Task*/void Delete(int id);
     }
 }

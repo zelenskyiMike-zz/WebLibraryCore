@@ -19,7 +19,7 @@ namespace WebLibraryCore.DataAccess.Repository
 
         public IEnumerable<Book> GetAllBooksWithGenres()
         {
-            return context.Books.Include(g => g.BookGenres);
+            return context.Books/*.Include(g => g.BookGenres)*/;
         }
 
         public IEnumerable<Author> GetAuthorsNotExistInBook(Book book)

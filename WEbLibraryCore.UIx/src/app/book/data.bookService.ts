@@ -37,8 +37,8 @@ export class DataBookService extends BehaviorSubject<any[]> {
   }
     
   updateBook(book: Book) {
-    let result = this.http.put(this.url + '/edit'/* + book.bookID*/, book);
-
+    let result = this.http.put(this.url + '/edit/' + book.bookID, book).toPromise();
+    debugger;
     return result;
   }
   deleteBook(id: number) {

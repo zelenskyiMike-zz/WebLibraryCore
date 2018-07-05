@@ -357,8 +357,7 @@ var BookEditComponent = /** @class */ (function () {
         });
     };
     BookEditComponent.prototype.save = function () {
-        var _this = this;
-        this.bookService.updateBook(this.book).subscribe(function (data) { return _this.router.navigateByUrl("/"); });
+        this.bookService.updateBook(this.book); //.subscribe(data => this.router.navigateByUrl("/"));
     };
     BookEditComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -461,8 +460,8 @@ var BookListComponent = /** @class */ (function () {
             console.log(JSON.stringify(dataItem) + " from component");
             this.dataService.updateBook(this.formGroup.value);
             // close the editor, that is, revert the row back into view mode
-            //sender.closeRow(rowIndex);
-            sender.collapseRow(rowIndex);
+            sender.closeRow(rowIndex);
+            //sender.collapseRow(rowIndex);
         }
         this.ngOnInit();
     };
@@ -478,8 +477,6 @@ var BookListComponent = /** @class */ (function () {
         this.formGroup = this.formBuilder.group(dataItem);
         this.editedRowIndex = rowIndex;
         sender.editRow(rowIndex, this.formGroup);
-        setTimeout(function () {
-        });
         debugger;
     };
     BookListComponent.prototype.removeHandler = function (_a) {
@@ -619,7 +616,8 @@ var DataBookService = /** @class */ (function (_super) {
         return result;
     };
     DataBookService.prototype.updateBook = function (book) {
-        var result = this.http.put(this.url + '/edit' /* + book.bookID*/, book);
+        var result = this.http.put(this.url + '/edit/' + book.bookID, book).toPromise();
+        debugger;
         return result;
     };
     DataBookService.prototype.deleteBook = function (id) {

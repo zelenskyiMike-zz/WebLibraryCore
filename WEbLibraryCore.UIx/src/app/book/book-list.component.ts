@@ -41,7 +41,6 @@ export class BookListComponent implements OnInit {
 
   public onStateChange(state: State) {
     this.gridState = state;
-    console.log(state + " HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     this.load();
   }
 
@@ -68,8 +67,8 @@ export class BookListComponent implements OnInit {
       this.dataService.updateBook(this.formGroup.value);
         
       // close the editor, that is, revert the row back into view mode
-      //sender.closeRow(rowIndex);
-      sender.collapseRow(rowIndex);
+      sender.closeRow(rowIndex);
+      //sender.collapseRow(rowIndex);
     }
 
     this.ngOnInit();
@@ -88,9 +87,7 @@ export class BookListComponent implements OnInit {
     this.formGroup = this.formBuilder.group(dataItem);
     this.editedRowIndex = rowIndex;
     sender.editRow(rowIndex, this.formGroup);
-    setTimeout(() => {
-      
-    });
+   
     debugger;
 
   }

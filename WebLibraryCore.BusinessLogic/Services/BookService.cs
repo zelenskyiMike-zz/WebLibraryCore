@@ -36,10 +36,10 @@ namespace WebLibraryCore.BusinessLogic.Services
             return bookMaped;
         }
 
-        public async void Update(GetBookView bookView)
+        public /*async*/ void Update(GetBookView bookView)
         {
             var book = Mapper.Map<GetBookView, Book>(bookView);
-            await bookRepository.Update(book);
+            /*await*/ bookRepository.Update(book);
         }
 
         public /*async*/ void Delete(int id)

@@ -34,10 +34,10 @@ namespace WebLibraryCore.BusinessLogic.Services
             return authorsMaped;
         }
 
-        public async void Update(GetAuthorView authorView)
+        public /*async*/ void Update(GetAuthorView authorView)
         {
             var authors = Mapper.Map<GetAuthorView, Author>(authorView);
-            await authorsRepository.Update(authors);
+            /*await*/ authorsRepository.Update(authors);
         }
 
         public /*async*/ void Delete(int id)

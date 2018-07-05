@@ -51,8 +51,8 @@ namespace WebLibraryCore.WebUI.Controllers
 
     // PUT: api/Book/5
     [HttpPut]
-    [Route("edit")]
-    public IActionResult Put(/*int id,*/ [FromBody]GetBookView book)
+    [Route("edit/{id}")]
+    public IActionResult Put(int id,[FromBody]GetBookView book)
     {
       _bookService.Update(book);
 

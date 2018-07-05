@@ -21,10 +21,10 @@ namespace WebLibraryCore.DataAccess.Repository
             /*await*/ context.SaveChanges/*Async*/();
         }
 
-        public async Task Update(TEntity entity)
+        public /*async Task*/void Update(TEntity entity)
         {
             context.Set<TEntity>().Update(entity);
-            await context.SaveChangesAsync();
+            /*await*/ context.SaveChanges/*Async*/();
         }
 
         public void /*async Task*/ Delete(int id)

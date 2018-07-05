@@ -34,10 +34,10 @@ namespace WebLibraryCore.BusinessLogic.Services
             return publicationMaped;
         }
 
-        public async void Update(GetPublicationView publicationView)
+        public /*async*/ void Update(GetPublicationView publicationView)
         {
             var publication = Mapper.Map<GetPublicationView, Publication>(publicationView);
-            await publicationRepository.Update(publication);
+            /*await*/ publicationRepository.Update(publication);
         }
 
         public /*async*/ void Delete(int id)
