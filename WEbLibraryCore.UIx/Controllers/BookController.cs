@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using WebLibraryCore.BusinessLogic.Services;
 using WebLibraryCore.ViewModels.ViewModels;
 
 namespace WebLibraryCore.WebUI.Controllers
 {
   //[Produces("application/json")]
+  [BindRequired]
   [Route("api/Book")]
   public class BookController : Controller
   {
@@ -38,7 +40,6 @@ namespace WebLibraryCore.WebUI.Controllers
       return await _bookService.GetBookDetails(id);
     }
 
-    // POST: api/Book
     [HttpPost]
     [Route("create")]
     public IActionResult Post([FromBody]GetBookView book)
@@ -50,7 +51,8 @@ namespace WebLibraryCore.WebUI.Controllers
 
     // PUT: api/Book/5
     [HttpPut]
-    public IActionResult Put(int id, [FromBody]GetBookView book)
+    [Route("edit")]
+    public IActionResult Put(/*int id,*/ [FromBody]GetBookView book)
     {
       _bookService.Update(book);
 

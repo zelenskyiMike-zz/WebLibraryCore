@@ -27,8 +27,6 @@ export class BookListComponent implements OnInit {
     take: 10
   };
 
-
-
   constructor(private dataService: DataBookService, private formBuilder: FormBuilder) {
     this.createFormGroup = this.createFormGroup.bind(this);
   }
@@ -39,8 +37,7 @@ export class BookListComponent implements OnInit {
 
   public onStateChange(state: State) {
     this.gridState = state;
-    debugger;
-
+    console.log(state + " HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     this.load();
   }
 
@@ -51,34 +48,16 @@ export class BookListComponent implements OnInit {
   }
 
   addHandler({ sender, dataItem }) {
-    //formInstance.reset();
-    //this.closeEditor(sender);
-    sender.addRow(new Book(null, null, '', null))
-    debugger;
+    sender.addRow(new Book(0, null, '', null))
   }
 
   public saveHandler({ sender, rowIndex, dataItem, isNew }) {
-    // update the data source
+    debugger;
     if (isNew) {
-      //console.log(JSON.stringify(dataItem) + " from component");
-   
-      //this.formGroup.patchValue({ bookName: 'ada', genreID: 1, yearOfPublish: 1234 });
-      //dataItem = this.formGroup.value;
-      //console.log(JSON.stringify(this.formGroup.value) + " from component");
-
-
-      //let data2 = this.viewRef.get(rowIndex);
-
-      //let data = this.createFormGroup(dataItem);
-
-      debugger;
-     // let formData = this.formGroup.d
+      
       this.dataService.createBook(dataItem);
-      //console.log(this.dataService.createBook(this.createFormGroup(dataItem)));
-     // debugger;
-      // close the editor, that is, revert the row back into view mode
-      sender.saveRow();
-      //sender.closeRow(rowIndex);
+      sender.closeRow(rowIndex);
+
     }
     if (!isNew) {
       console.log(JSON.stringify(dataItem) + " from component");
@@ -88,30 +67,30 @@ export class BookListComponent implements OnInit {
       sender.closeRow(rowIndex);
     }
 
+    this.ngOnInit();
+  }
+
+  editHandler({ sender, dataItem, rowIndex }) {
+    /*new Book(dataItem.bookID, dataItem.genreID, dataItem.bookName, dataItem.yearOfPublish)*/
+    console.log(JSON.stringify(dataItem) + " from HANDLER");
+    sender.editRow(rowIndex,new Book(dataItem.bookID, dataItem.genreID, dataItem.bookName, dataItem.yearOfPublish));
+    debugger;
   }
 
   removeHandler({ dataItem }) {
+    debugger;
     this.dataService.deleteBook(dataItem.bookID);
   }
 
   public createFormGroup(args: any): FormGroup {
-    const item = args.isNew ? new Book(null,null,'',null) : args.dataItem;
+    const item = args.isNew ? new Book(0,null,'',null) : args.dataItem;
     this.formGroup = this.formBuilder.group({
-      'bookID': item.bookID,
+      'bookID': [item.bookID, Validators.maxLength],
       'bookName': [item.bookName, Validators.required],
       'genreID': item.genreID,
-      'yearOfPublish': [item.yearOfPublish, Validators.compose([Validators.required, Validators.pattern('^[0-9]{1,3}')])]
+      'yearOfPublish': [item.yearOfPublish, Validators.compose([Validators.required, Validators.min(864), Validators.max(2018)])]
     });
 
-    return this.formGroup/*.value*/;
-   //return this.formGroup.patchValue();
-  }
-
-
-  editHandler({ dataItem }) {
-    console.log(JSON.stringify(dataItem) + " from HANDLER");
-    this.createFormGroup(dataItem);
-    debugger;
-    //this.dataService.updateBook(dataItem);
+    return this.formGroup;
   }
 }

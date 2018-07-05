@@ -12,4 +12,4 @@ export class Book {
   public bookID: number;
   public genreID: number;
   public bookName: string;
-  public yearOfPublish: number*/
+  public yearOfPublish: number;*/

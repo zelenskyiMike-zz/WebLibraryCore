@@ -30,19 +30,14 @@ export class DataBookService extends BehaviorSubject<any[]> {
     return result;
   }
   createBook<Book>(book: Book): Observable<Book> {
-    let result = this.http.post<Book>(this.url + "/create", book)/*.toPromise()*/;
     debugger;
-    //let resultWrong = this.http.post<Book>(this.url + "/create", book);
-
-    //let currentValue = this.behaviorSubject.getValue();
-
-    //console.log(currentValue);
-
+    let result = this.http.post<Book>(this.url + "/create", book).toPromise();
+    this.getBooks();
     return result;
   }
     
   updateBook(book: Book) {
-    let result = this.http.put(this.url + '/' + book.bookID, book);
+    let result = this.http.put(this.url + '/edit'/* + book.bookID*/, book);
 
     return result;
   }
